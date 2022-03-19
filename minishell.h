@@ -6,7 +6,7 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/03/15 20:24:59 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/03/19 19:33:09 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ char	*create_new_from_temp(char *temp);
 char	*single_quoted_to_text(char *original);
 char	*double_quoted_to_text(char	*original, char **envp);
 char	*quoted_to_text(char *original, char quote, char **envp);
+
+/* join_quoted_and_adjacent.c */
+char	*createstr_beforequote(char *start_ptr);
+char	*find_afterquote(char *start_ptr);
+char	*createstr_afterquote(char *start_ptr);
+char	*join_quoted_and_adjacent(char *start_ptr, char quote, char **envp);
 
 /* minishell_utils_strings.c */
 char	*ft_strjoin_three(char *first, char *second, char *third);

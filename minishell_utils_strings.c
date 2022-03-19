@@ -6,11 +6,12 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:14:08 by aionescu          #+#    #+#             */
-/*   Updated: 2022/03/15 20:26:01 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/03/19 19:26:18 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
+#include "minishell.h"
 
 char	*ft_strjoin_three(char *first, char *second, char *third)
 {

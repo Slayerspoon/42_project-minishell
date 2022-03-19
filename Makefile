@@ -6,7 +6,7 @@
 #    By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/02 19:14:52 by aionescu          #+#    #+#              #
-#    Updated: 2022/03/15 20:23:32 by aionescu         ###   ########.fr        #
+#    Updated: 2022/03/19 19:33:57 by aionescu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME = minishell
 LIBFT = libft.a
 
 SRC = minishell_main.c check_quotes.c minishell_utils_strings.c \
-		minishell_utils_env.c minishell_quoted_to_text.c
+		minishell_utils_env.c minishell_quoted_to_text.c \
+		join_quoted_and_adjacent.c
 
 all: $(NAME)
 
