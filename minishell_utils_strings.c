@@ -6,7 +6,7 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:14:08 by aionescu          #+#    #+#             */
-/*   Updated: 2022/03/19 19:26:18 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/03/20 21:43:32 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,25 @@ char	*ft_strjoin_three(char *first, char *second, char *third)
 	ft_strlcat(final_str, second, ft_strlen(first) + ft_strlen(second) + 1);
 	ft_strlcat(final_str, third, str_len + 1);
 	return (final_str);
+}
+
+/* Reads until '\0' or ' ' or '\t' and creates and returns a string from it. */
+char	*word_to_string(char *start_ptr)
+{
+	char	*str;
+	size_t	index;
+
+	index = 0;
+	while (start_ptr[index] != '\0' && start_ptr[index] != ' '
+		&& start_ptr[index] != '\t')
+		index++;
+	str = ft_calloc(index + 1, sizeof(char));
+	index = 0;
+	while (start_ptr[index] != '\0' && start_ptr[index] != ' '
+		&& start_ptr[index] != '\t')
+	{
+		str[index] = start_ptr[index];
+		index++;
+	}
+	return (str);
 }

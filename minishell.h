@@ -6,7 +6,7 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/03/19 19:33:09 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/03/20 21:22:14 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,16 @@ char	*find_afterquote(char *start_ptr);
 char	*createstr_afterquote(char *start_ptr);
 char	*join_quoted_and_adjacent(char *start_ptr, char quote, char **envp);
 
+/* input_to_strings.c */
+int		has_quote(char *start_ptr);
+int		final_string_length(char *start_ptr);
+int		count_needed_strings(char *input);
+char	*generate_string(char *start_ptr, char **envp);
+char	**input_to_strings(char *input, char **envp);
+
 /* minishell_utils_strings.c */
 char	*ft_strjoin_three(char *first, char *second, char *third);
+char	*word_to_string(char *start_ptr);
 
 /* minishell_utils_env.c */
 char	*get_val_of_key(char *key_value_pair);
