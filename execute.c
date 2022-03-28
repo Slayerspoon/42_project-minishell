@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 15:31:14 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/03/28 17:59:53 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/03/28 18:02:35 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void	be_patient(int amount)
 //I JUST REALIZED THIS IS VERY DUMB IM PASSING THE SAME COMMAND TO BOTH PROCESSES
 //NEED TO FIGURE OUT HOW TO DO THIS PROPERLY
 //making a struct with the command and flags might work
+//also try to recreate execvp for convenience
 void	exec_piped(char *cmd, char **flags, char **envp)
 {
 	int		pipe_fd[2];
