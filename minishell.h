@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/03/20 21:22:14 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/03/28 15:21:55 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,11 @@ char	*word_to_string(char *start_ptr);
 /* minishell_utils_env.c */
 char	*get_val_of_key(char *key_value_pair);
 char	*get_env_var(char *var_name, char **envp);
+
+//execute_utils.c and execute.c
+void	throw_error(char *message, int code);
+char	**get_path(char **envp);
+void	execute(char *cmd, char **flags, char **envp);
+void	exec_piped(char *cmd, char **flags, char **envp);
 
 #endif
