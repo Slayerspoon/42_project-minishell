@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 15:31:14 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/03/29 15:00:10 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/03/29 16:52:44 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,16 @@ void	pipe_second_child(char **parsed_pipe, char **envp, int pipe_fd[2])
 //execute when piping (not sure how to indicate its needed yet)
 //making a struct with the command and flags might work
 //	linked list kinda thingie with indicators on pipes/redirections??
+//	like this:
+	// typedef	struct s_parsed
+	// {
+	// 	char	**cmd; - array of command and flags
+	// 	char	**input_file; - NULL by default
+	// 	char	**output_file; - NULL by default
+	// 	t_parsed	*next; - NULL if not piped anywhere
+	// 	t_parsed	*previous; - NULL for first element
+	// } t_parsed;
+
 void	exec_piped(char **parsed, char **parsed_pipe, char **envp)
 {
 	int		pipe_fd[2];
@@ -72,6 +82,7 @@ void	exec_piped(char **parsed, char **parsed_pipe, char **envp)
 	}
 	else
 	{
+		//mayhaps do this in a loop for multiple pipes?
 		p2 = fork();
 		if (p2 == -1)
 			throw_error("Failed forking child", 1);
