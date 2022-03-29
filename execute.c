@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 15:31:14 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/03/28 18:02:35 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/03/29 15:00:10 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 #include "libft/libft.h"
 
 //execute command
-void	execute(char *cmd, char **flags, char **envp)
+void	execute(char **parsed, char **envp)
 {
-	char	**paths;
-	char	*command;
-	int		i;
 	pid_t	pid;
 
 	pid = fork();
@@ -26,86 +23,39 @@ void	execute(char *cmd, char **flags, char **envp)
 		throw_error("Failed forking child", 1);
 	else if (pid == 0)
 	{
-		paths = get_path(envp);
-		i = 0;
-		while (paths[i])
-		{
-			command = ft_strjoin(paths[i], cmd);
-			execve(command, flags, envp);
-			free(command);
-			i++;
-		}
-		perror(flags[0]);
+		ft_execvp(parsed[0], parsed, envp);
+		perror(parsed[0]);
 		exit(1);
 	}
 	wait(NULL);
 }
 
 //seperated because fuck you, thats why
-void	pipe_child(char *cmd, char **flags, char **envp, int pipe_fd[2])
+void	pipe_child(char **parsed, char **envp, int pipe_fd[2])
 {
-	int		i;
-	char	*command;
-	char	**paths;
-
 	close(pipe_fd[0]);
 	dup2(pipe_fd[1], STDOUT_FILENO);
 	close(pipe_fd[1]);
-	paths = get_path(envp);
-	i = 0;
-	while (paths[i])
-	{
-		command = ft_strjoin(paths[i], cmd);
-		execve(command, flags, envp);
-		free(command);
-		i++;
-	}
-	perror(flags[0]);
+	ft_execvp(parsed[0], parsed, envp);
+	perror(parsed[0]);
 	exit(1);
 }
 
 //bruh
-void	pipe_second_child(char *cmd, char **flags, char **envp, int pipe_fd[2])
+void	pipe_second_child(char **parsed_pipe, char **envp, int pipe_fd[2])
 {
-	int		i;
-	char	*command;
-	char	**paths;
-
 	close(pipe_fd[1]);
 	dup2(pipe_fd[0], STDIN_FILENO);
 	close(pipe_fd[0]);
-	paths = get_path(envp);
-	i = 0;
-	while (paths[i])
-	{
-		command = ft_strjoin(paths[i], cmd);
-		execve(command, flags, envp);
-		free(command);
-		i++;
-	}
-	perror(flags[0]);
+	ft_execvp(parsed_pipe[0], parsed_pipe, envp);
+	perror(parsed_pipe[0]);
 	exit(1);
 }
 
-//wait for *amount* of processes
-void	be_patient(int amount)
-{
-	int	i;
-
-	i = 0;
-	while (i < amount)
-	{
-		wait(NULL);
-		i++;
-	}
-}
-
 //execute when piping (not sure how to indicate its needed yet)
-//I JUST REALIZED THIS IS VERY DUMB IM PASSING THE SAME COMMAND TO BOTH PROCESSES
-//NEED TO FIGURE OUT HOW TO DO THIS PROPERLY
 //making a struct with the command and flags might work
-//also try to recreate execvp for convenience
-void	exec_piped(char *cmd, char **flags, char **envp)
+//	linked list kinda thingie with indicators on pipes/redirections??
+void	exec_piped(char **parsed, char **parsed_pipe, char **envp)
 {
 	int		pipe_fd[2];
 	pid_t	p1;
@@ -118,7 +68,7 @@ void	exec_piped(char *cmd, char **flags, char **envp)
 		throw_error("Failed forking child", 1);
 	if (p1 == 0)
 	{
-		pipe_child(cmd, flags, envp, pipe_fd);
+		pipe_child(parsed, envp, pipe_fd);
 	}
 	else
 	{
@@ -127,7 +77,7 @@ void	exec_piped(char *cmd, char **flags, char **envp)
 			throw_error("Failed forking child", 1);
 		if (p2 == 0)
 		{
-			pipe_second_child(cmd, flags, envp, pipe_fd);
+			pipe_second_child(parsed_pipe, envp, pipe_fd);
 		}
 		else
 			be_patient(2);
