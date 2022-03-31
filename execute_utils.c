@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:19:13 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/03/29 15:02:19 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/03/31 11:14:05 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	**get_path(char **envp)
 }
 
 //recreation of execvp so i dont have to deal with this bullshit multiple times
+//try as a relative and absolute path, instead of just envp
 void	ft_execvp(char *cmd, char **flags, char **envp)
 {
 	char	**paths;
@@ -53,6 +54,7 @@ void	ft_execvp(char *cmd, char **flags, char **envp)
 
 	paths = get_path(envp);
 	i = 0;
+	execve(cmd, flags, envp);
 	while (paths[i])
 	{
 		command = ft_strjoin(paths[i], cmd);
