@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/03/29 14:53:45 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/04 18:42:09 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,25 @@
 # include <signal.h>
 # include <term.h>
 # include <termios.h>
+
+typedef struct s_data
+{
+	char	***commands; // format of [[command1, flag1, flag2], [command2, flag1, flag2]]
+	char	**envp; // just envp
+	char	**path; // path, malloc'd, used in execution
+	char	*limiter; // limiter in case of '<<', otherwise NULL
+	int		srcin; // 1 means '<' redirection, 2 means '<<' redirection
+	int		srcout; // 1 means '>' redirection, 2 means '>>' redirection
+	int		srcerr; // 1 means '>' redirection, 2 means '>>' redirection
+	// Important to remember - 2> or 2>> redirects error instead of output
+	// and in the same way &> redirects both out and err
+	int		here_doc_fd; // used in execution
+	char	*nameout; // name of the output file if needed, else NULL
+	char	*namein; // name of the input file if needed, else NULL
+	char	*namerr; // name of the error file if needed, else NULL
+	int		pipes; // number of pipes
+	int		exit_status; // exit status of last command, used in execution
+}	t_data;
 
 /* check_quotes.c */
 char	what_is_next_quote(char *str);
@@ -62,10 +81,21 @@ char	*get_val_of_key(char *key_value_pair);
 char	*get_env_var(char *var_name, char **envp);
 
 //execute_utils.c and execute.c
-void	throw_error(char *message, int code);
-void	ft_execvp(char *cmd, char **flags, char **envp);
-void	execute(char **flags, char **envp);
-void	exec_piped(char **parsed, char **parsed_pipe, char **envp);
-void	be_patient(int amount);
+char	*append_char(char *line, char c);
+int		arr_length(char ***arr);
+char	**get_path(char **envp);
+void	execute_line(t_data *data);
+
+//here_doc.c
+int		open_file_write(char *name, int mode);
+int		here_doc(t_data *data);
+
+//input_output.c
+int		redirect_input(t_data *data);
+void	redirect_output(t_data *data);
+
+//pipes.c
+void	pipe_first_command(int *fd, t_data *data);
+void	handle_pipes(int *fd, t_data *data);
 
 #endif

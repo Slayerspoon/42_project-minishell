@@ -6,19 +6,12 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:19:13 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/03/31 11:14:05 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/04 17:26:00 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft/libft.h"
-
-//for convenience
-void	throw_error(char *message, int code)
-{
-	printf("%s\n", message);
-	exit(code);
-}
 
 //get array of possible paths from PATH
 char	**get_path(char **envp)
@@ -44,35 +37,36 @@ char	**get_path(char **envp)
 	return (path);
 }
 
-//recreation of execvp so i dont have to deal with this bullshit multiple times
-//try as a relative and absolute path, instead of just envp
-void	ft_execvp(char *cmd, char **flags, char **envp)
+char	*append_char(char *line, char c)
 {
-	char	**paths;
-	char	*command;
+	char	*new_line;
 	int		i;
 
-	paths = get_path(envp);
-	i = 0;
-	execve(cmd, flags, envp);
-	while (paths[i])
-	{
-		command = ft_strjoin(paths[i], cmd);
-		execve(command, flags, envp);
-		free(command);
-		i++;
-	}
+	i = (int)ft_strlen(line);
+	new_line = malloc(sizeof(char) * (i + 2));
+	ft_memcpy(new_line, line, i);
+	new_line[i] = c;
+	new_line[i + 1] = 0;
+	free(line);
+	return (new_line);
 }
 
-//wait for *amount* of processes
-void	be_patient(int amount)
+int	arr_length(char ***arr)
 {
 	int	i;
 
 	i = 0;
-	while (i < amount)
-	{
-		wait(NULL);
+	while (arr[i])
 		i++;
-	}
+	return (i);
+}
+
+void	free_arr(char **arr)
+{
+	int	i;
+
+	i = -1;
+	while (arr[++i])
+		free(arr[i]);
+	free(arr);
 }
