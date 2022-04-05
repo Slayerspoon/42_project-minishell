@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 15:31:14 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/04 17:43:40 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/05 15:57:04 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	exec_command(char **parsed, t_data *data)
 	{
 		while (data->path[++i])
 		{
-			data->path[i] = append_char(data->path[i], '/');
 			full_path = ft_strjoin(data->path[i], parsed[0]);
 			execve(full_path, parsed, data->envp);
 			free(full_path);
@@ -61,7 +60,7 @@ void	execute_single_command(t_data *data)
 	else if (execute_built_in(data, 0) == -1)
 	{
 		pid = fork();
-		if (pid == 1)
+		if (pid == -1)
 			perror("fork error");
 		if (!pid)
 			exec_command(data->commands[0], data);
@@ -101,8 +100,8 @@ void	execute_line(t_data *data)
 		if (ret_val == -1)
 			return ;
 		data->here_doc_fd = open("temp_file_frog", O_RDONLY, 0666);
-		unlink("temp_file_frog");
 		dup2(data->here_doc_fd, 0);
+		unlink("temp_file_frog");
 	}
 	if (arr_length(data->commands) == 1)
 	{

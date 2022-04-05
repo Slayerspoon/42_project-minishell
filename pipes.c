@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 17:43:00 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/04 18:39:09 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/05 15:34:19 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	handle_pipes(int *fd, t_data *data)
 	i = 0;
 	while (++i < data->pipes)
 	{
-		if (pipe(new_fd[i % 2] == -1))
+		if (pipe(new_fd[i % 2]) == -1)
 			perror("pipe error");
 		pid = fork();
 		if (pid == -1)

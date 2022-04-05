@@ -6,17 +6,26 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:50:28 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/04 17:47:41 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/05 16:00:54 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "minishell.h"
 
+void	write_to_file(int fd, char *buff)
+{
+	int	i;
+
+	i = ft_strlen(buff);
+	write(fd, buff, i);
+	write(fd, "\n", 1);
+}
+
 int	open_file_write(char *name, int mode)
 {
 	if (access(name, F_OK))
-		return (open(name, O_WRONLY | O_ASYNC, 0666));
+		return (open(name, O_CREAT | O_RDWR, 0666));
 	else
 	{
 		if (mode == 1)
@@ -29,8 +38,8 @@ int	open_file_write(char *name, int mode)
 
 int	error(t_data *data)
 {
-	printf("minishell: warning: here-document delimited by "
-		"end-of-file (wanted '%s')\n", data->limiter);
+	printf("minishell: warning: here-document delimited by \
+		end-of-file (wanted '%s')\n", data->limiter);
 	return (-1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 14:58:34 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/04 15:44:51 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/05 12:59:56 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ int	redirect_input(t_data *data)
 			return (1);
 		}
 	}
-	retrun (0);
+	return (0);
 }

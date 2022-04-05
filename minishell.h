@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/04 18:42:09 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/05 12:57:51 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ char	*append_char(char *line, char c);
 int		arr_length(char ***arr);
 char	**get_path(char **envp);
 void	execute_line(t_data *data);
+void	free_arr(char **arr);
+int		execute_built_in(t_data *data, int index);
+void	exec_command(char **parsed, t_data *data);
 
 //here_doc.c
 int		open_file_write(char *name, int mode);
