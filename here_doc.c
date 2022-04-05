@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:50:28 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/05 16:00:54 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/05 17:46:44 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	open_file_write(char *name, int mode)
 	else
 	{
 		if (mode == 1)
-			return (open(name, O_WRONLY | O_CREAT, 0666));
-		else if (mode == 2)
 			return (open(name, O_WRONLY | O_TRUNC, 0666));
+		else if (mode == 2)
+			return (open(name, O_WRONLY | O_APPEND, 0666));
 	}
 	return (-1);
 }
