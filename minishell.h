@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/05 12:57:51 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/05 18:53:00 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 typedef struct s_data
 {
-	char	***commands; // format of [[command1, flag1, flag2], [command2, flag1, flag2]]
+	char	***commands; // format of [[command1, flag1, flag2], [command2, flag1, flag2]], malloc'd
 	char	**envp; // just envp
 	char	**path; // path, malloc'd, used in execution
 	char	*limiter; // limiter in case of '<<', otherwise NULL
