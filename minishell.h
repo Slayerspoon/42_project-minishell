@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/05 18:53:00 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/06 14:01:38 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 typedef struct s_data
 {
 	char	***commands; // format of [[command1, flag1, flag2], [command2, flag1, flag2]], malloc'd
+	char	***redirects; // format of [["<<", "frog"], [">", "file"], [NULL]] - NULL if no redirection for command at that index
 	char	**envp; // just envp
 	char	**path; // path, malloc'd, used in execution
 	char	*limiter; // limiter in case of '<<', otherwise NULL

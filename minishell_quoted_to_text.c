@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_quoted_to_text.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 20:19:50 by aionescu          #+#    #+#             */
-/*   Updated: 2022/03/15 21:31:30 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/05 19:22:27 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	*identify_env_var(char *start_ptr)
 		identified_name[chars] = start_ptr[chars];
 		chars++;
 	}
+	printf("Here: %s\n", identified_name);
 	return (identified_name);
 }
 
