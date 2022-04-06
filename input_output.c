@@ -6,14 +6,14 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 14:58:34 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/05 12:59:56 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/06 16:42:36 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "minishell.h"
 
-void	redirect_output(t_data *data)
+int	redirect_output(t_data *data)
 {
 	int	fd_file_out;
 	int	fd_file_err;
@@ -22,24 +22,19 @@ void	redirect_output(t_data *data)
 	{
 		fd_file_out = open_file_write(data->nameout, data->srcout);
 		if (fd_file_out == -1)
-			perror(data->nameout);
+			return (throw_error(data->nameout, -1));
 		else
-		{
-			dup2(fd_file_out, 1);
-			close(fd_file_out);
-		}
+			dup_and_close(fd_file_out, 2);
 	}
 	if (data->srcerr != 0)
 	{
 		fd_file_err = open_file_write(data->namerr, data->srcerr);
 		if (fd_file_err == -1)
-			perror(data->namerr);
+			return (throw_error(data->namerr, -1));
 		else
-		{
-			dup2(fd_file_err, 2);
-			close(fd_file_err);
-		}
+			dup_and_close(fd_file_err, 2);
 	}
+	return (0);
 }
 
 int	redirect_input(t_data *data)
@@ -69,4 +64,28 @@ int	redirect_input(t_data *data)
 		}
 	}
 	return (0);
+}
+
+int	is_err_append(char *str)
+{
+	if ((ft_strlen(str) == 3) && (!ft_strncmp(str, "2>>", 3)))
+		return (1);
+	else
+		return (0);
+}
+
+int	is_both_trunc(char *str)
+{
+	if ((ft_strlen(str) == 2) && (!ft_strncmp(str, "&>", 2)))
+		return (1);
+	else
+		return (0);
+}
+
+int	is_both_append(char *str)
+{
+	if ((ft_strlen(str) == 3) && (!ft_strncmp(str, "&>>", 3)))
+		return (1);
+	else
+		return (0);
 }
