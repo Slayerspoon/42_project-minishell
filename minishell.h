@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/06 14:01:38 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/06 21:18:09 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,13 @@ typedef struct s_data
 	int		pipes; // number of pipes
 	int		exit_status; // exit status of last command, used in execution
 }	t_data;
+
+enum
+{
+	OUT,
+	ERR,
+	BOTH
+};
 
 /* check_quotes.c */
 char	what_is_next_quote(char *str);
@@ -89,6 +96,9 @@ void	execute_line(t_data *data);
 void	free_arr(char **arr);
 int		execute_built_in(t_data *data, int index);
 void	exec_command(char **parsed, t_data *data);
+//error has to be equal to 0 - norm always finds a way to fuck with me
+//for the same reason i has to be 0
+int		set_data(t_data *data, int id, int error, int i);
 
 //here_doc.c
 int		open_file_write(char *name, int mode);
@@ -96,10 +106,29 @@ int		here_doc(t_data *data);
 
 //input_output.c
 int		redirect_input(t_data *data);
-void	redirect_output(t_data *data);
+int		redirect_output(t_data *data);
+int		is_err_append(char *str);
+int		is_both_trunc(char *str);
+int		is_both_append(char *str);
 
 //pipes.c
 void	pipe_first_command(int *fd, t_data *data);
 void	handle_pipes(int *fd, t_data *data);
+
+//redirects.c and redirects_utils.c
+int		is_heredoc(char *str);
+int		is_input(char *str);
+int		is_out_trunc(char *str);
+int		is_out_append(char *str);
+int		is_err_trunc(char *str);
+int		execute_heredoc(t_data *data, char *limiter);
+int		execute_in(t_data *data, char *file);
+int		execute_trunc(t_data *data, char *file, int fd);
+int		execute_append(t_data *data, char *file, int fd);
+
+//misc.c
+int		throw_error(char *str, int code);
+void	dup_and_close(int fd1, int fd2);
+void	set_null(t_data *data);	
 
 #endif
