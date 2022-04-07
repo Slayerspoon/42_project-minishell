@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 14:28:35 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/06 17:07:54 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/07 14:22:39 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,22 @@ int	execute_in(t_data *data, char *file)
 int	execute_trunc(t_data *data, char *file, int fd)
 {
 	if (fd == OUT)
+	{
 		data->srcout = 1;
+		data->nameout = file;
+	}
 	else if (fd == ERR)
+	{
 		data->srcerr = 1;
+		data->namerr = file;
+	}
 	else if (fd == BOTH)
 	{
 		data->srcout = 1;
 		data->srcerr = 1;
+		data->nameout = file;
+		data->namerr = file;
 	}
-	data->nameout = file;
 	return (redirect_output(data));
 }
 

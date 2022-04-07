@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/06 17:16:32 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/06 21:18:09 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,6 @@ int		execute_append(t_data *data, char *file, int fd);
 //misc.c
 int		throw_error(char *str, int code);
 void	dup_and_close(int fd1, int fd2);
-void	set_null(t_data *data);
+void	set_null(t_data *data);	
 
 #endif
