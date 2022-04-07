@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 17:43:00 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/05 15:34:19 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/06 17:06:23 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	multi_pipe_child(int i, int *fd, int (*new_fd)[2], t_data *data)
 	close(new_fd[i % 2][0]);
 	dup2(new_fd[i % 2][1], 1);
 	close(new_fd[i % 2][1]);
+	if (set_data(data, i, 0, 0))
+		exit(1);
 	exec_all(data, i);
 }
 
@@ -43,6 +45,8 @@ void	pipe_last_command(int i, int *fd, t_data *data)
 	pid = fork();
 	if (pid == -1)
 		perror("fork error");
+	if (set_data(data, i, 0, 0))
+		exit(1);
 	if (!pid)
 		exec_all(data, i);
 	waitpid(0, &wstatus, 0);
@@ -81,24 +85,8 @@ void	pipe_first_command(int *fd, t_data *data)
 
 	dup2(fd[1], 1);
 	close(fd[0]);
-	if (data->srcin)
-	{
-		if (data->srcin == 2)
-		{
-			fd_file = open("temp_file_frog", O_RDONLY, 0666);
-			unlink("temp_file_frog");
-			dup2(fd_file, 0);
-			close(fd_file);
-			exec_all(data, 0);
-		}
-		else
-		{
-			if (!redirect_input(data))
-				exec_all(data, 0);
-			else
-				exit(1);
-		}
-	}
-	else
+	if (!set_data(data, 0, 0, 0))
 		exec_all(data, 0);
+	else
+		exit(1);
 }
