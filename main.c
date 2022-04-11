@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:50:25 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/11 14:48:43 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/11 15:36:35 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,16 @@ char	**copy_array(char **array)
 void	get_input(char **line)
 {
 	char	*prompt;
-
 	catch_signal(SIGINT, handle_signal);
 	catch_signal(SIGQUIT, handle_signal);
 	prompt = get_prompt();
 	line[0] = readline((const char *) prompt);
 	free(prompt);
+}
+
+void	cleanup(char *line)
+{
+	free(line);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -87,7 +91,9 @@ int	main(int argc, char **argv, char **envp)
 			add_history(line);
 			//parsing goes here
 			// execute_line(data);
-			wait(0);
+			while (wait(0) != -1)
+				continue ;
 		}
+		cleanup(line);
 	}
 }
