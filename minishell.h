@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/11 14:48:27 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/11 15:01:47 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ int		throw_error(char *str, int code);
 void	dup_and_close(int fd1, int fd2);
 void	set_null(t_data *data);
 void	clean_exit(t_data *data, int status);
+void	free_3d_arr(char ***arr);
 
 //signals.c
 int		catch_signal(int sig, void (*handler)(int));
