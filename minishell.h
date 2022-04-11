@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/06 21:18:09 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/11 14:48:27 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_data
 	char	*namerr; // name of the error file if needed, else NULL
 	int		pipes; // number of pipes
 	int		exit_status; // exit status of last command, used in execution
+	int		exit;
+	int		orig_fds[3];
 }	t_data;
 
 enum
@@ -129,6 +131,17 @@ int		execute_append(t_data *data, char *file, int fd);
 //misc.c
 int		throw_error(char *str, int code);
 void	dup_and_close(int fd1, int fd2);
-void	set_null(t_data *data);	
+void	set_null(t_data *data);
+void	clean_exit(t_data *data, int status);
+
+//signals.c
+int		catch_signal(int sig, void (*handler)(int));
+void	handle_signal(int sig);
+
+//struct_handling.c
+void	init(t_data *data, char **envp);
+
+//main.c
+char	**copy_array(char **array);
 
 #endif

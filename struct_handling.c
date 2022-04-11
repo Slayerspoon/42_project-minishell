@@ -1,48 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   misc.c                                             :+:      :+:    :+:   */
+/*   struct_handling.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 16:16:33 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/11 14:48:48 by kpucylo          ###   ########.fr       */
+/*   Created: 2022/04/11 14:04:44 by kpucylo           #+#    #+#             */
+/*   Updated: 2022/04/11 14:05:21 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "minishell.h"
 
-int	throw_error(char *str, int code)
+void	init(t_data *data, char **envp)
 {
-	perror(str);
-	return (code);
-}
-
-//this is here for norm reasons
-void	dup_and_close(int fd1, int fd2)
-{
-	dup2(fd1, fd2);
-	close (fd1);
-}
-
-void	set_null(t_data *data)
-{
+	data->commands = NULL;
+	data->redirects = NULL;
+	data->envp = copy_array(envp);
+	data->path = NULL;
 	data->limiter = NULL;
-	data->srcin = 0;
-	data->srcout = 0;
-	data->srcerr = 0;
+	data->pipes = 0;
 	data->nameout = NULL;
 	data->namein = NULL;
 	data->namerr = NULL;
-}
-
-void	clean_exit(t_data *data, int status)
-{
-	free_arr(data->envp);
-	//free_arr(data->commands);
-	//free_arr(data->redirects);
-	if (data->path)
-		free_arr(data->path);
-	exit(status);
+	data->exit_status = 0;
+	data->exit = 0;
+	data->orig_fds[0] = dup(0);
+	data->orig_fds[1] = dup(1);
+	data->orig_fds[2] = dup(2);
 }

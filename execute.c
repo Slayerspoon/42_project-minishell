@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 15:31:14 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/07 14:05:11 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/11 14:30:22 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	exec_command(char **parsed, t_data *data)
 // to be done when built-ins are implemented
 int	execute_built_in(t_data *data, int index)
 {
+	(void)data;
+	(void)index;
 	return (-1);
 }
 
@@ -92,7 +94,6 @@ void	execute_pipes(int *fd, t_data *data)
 void	execute_line(t_data *data)
 {
 	int	fd[2];
-	int	ret_val;
 
 	if (arr_length(data->commands) == 1)
 	{
