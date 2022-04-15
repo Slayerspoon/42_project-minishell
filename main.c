@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:50:25 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/11 15:36:35 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/15 16:20:27 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char	**copy_array(char **array)
 void	get_input(char **line)
 {
 	char	*prompt;
+
 	catch_signal(SIGINT, handle_signal);
 	catch_signal(SIGQUIT, handle_signal);
 	prompt = get_prompt();
@@ -67,9 +68,24 @@ void	get_input(char **line)
 	free(prompt);
 }
 
-void	cleanup(char *line)
+void	cleanup(char *line, t_data *data)
 {
+	dup2(0, data->orig_fds[0]);
+	dup2(1, data->orig_fds[1]);
+	dup2(2, data->orig_fds[2]);
+	close(data->orig_fds[0]);
+	close(data->orig_fds[1]);
+	close(data->orig_fds[2]);
 	free(line);
+	if (data->path)
+		free_arr(data->path);
+	if (data->commands)
+		free_3d_arr(data->commands);
+	if (data->redirects)
+		free_3d_arr(data->redirects);
+	init(data, data->envp, 1);
+	if (!access("temp_file_frog", F_OK))
+		unlink("temp_file_frog");
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -80,12 +96,12 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 1 || argv[0] == 0)
 		exit(1);
 	data = malloc(sizeof(t_data));
-	init(data, envp);
-	while (!data->exit)
+	init(data, envp, 0);
+	while (1)
 	{
 		get_input(&line);
 		if (!line)
-			clean_exit(data, 0);
+			clean_exit(data, 0, 0);
 		if (*line)
 		{
 			add_history(line);
@@ -94,6 +110,6 @@ int	main(int argc, char **argv, char **envp)
 			while (wait(0) != -1)
 				continue ;
 		}
-		cleanup(line);
+		cleanup(line, data);
 	}
 }

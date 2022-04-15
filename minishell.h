@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/11 15:01:47 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/15 18:32:57 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct s_data
 	char	*namerr; // name of the error file if needed, else NULL
 	int		pipes; // number of pipes
 	int		exit_status; // exit status of last command, used in execution
-	int		exit;
 	int		orig_fds[3];
 }	t_data;
 
@@ -132,7 +131,7 @@ int		execute_append(t_data *data, char *file, int fd);
 int		throw_error(char *str, int code);
 void	dup_and_close(int fd1, int fd2);
 void	set_null(t_data *data);
-void	clean_exit(t_data *data, int status);
+void	clean_exit(t_data *data, int status, int flag);
 void	free_3d_arr(char ***arr);
 
 //signals.c
@@ -140,9 +139,20 @@ int		catch_signal(int sig, void (*handler)(int));
 void	handle_signal(int sig);
 
 //struct_handling.c
-void	init(t_data *data, char **envp);
+void	init(t_data *data, char **envp, int mode);
+
+//builtins.c, export_unset.c and export_unset2.c
+int		echo(char **cmd);
+int		cd(char **cmd, t_data *data);
+int		pwd(char **cmd);
+int		env(char **cmd, t_data *data);
+int		ft_exit(char **cmd, t_data *data);
+int		export(char **cmd, t_data *data);
+void	unset2(t_data *data, char *cmd, int len);
+int		unset_error(char *str);
 
 //main.c
 char	**copy_array(char **array);
+void	cleanup(char *line, t_data *data);
 
 #endif
