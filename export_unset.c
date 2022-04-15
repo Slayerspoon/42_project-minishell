@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 16:32:14 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/15 18:34:00 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/15 19:45:14 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	validity_check(char *str)
 		if (!ft_isalnum(str[i]))
 			break ;
 		i++;
-		if (i == ft_strlen(str))
+		if (i == (int)ft_strlen(str))
 			return (0);
 	}
 	ft_putstr_fd("export: ", 2);

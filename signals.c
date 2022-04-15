@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 13:20:15 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/15 13:28:44 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/15 19:54:49 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	handle_signal(int sig)
 	else if (sig == SIGQUIT)
 	{
 		rl_on_new_line();
-		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }
