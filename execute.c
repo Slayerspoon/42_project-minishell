@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 15:31:14 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/06 13:57:03 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/07 14:05:11 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,23 +94,10 @@ void	execute_line(t_data *data)
 	int	fd[2];
 	int	ret_val;
 
-	if (data->srcin == 2)
-	{
-		ret_val = here_doc(data);
-		if (ret_val == -1)
-			return ;
-		data->here_doc_fd = open("temp_file_frog", O_RDONLY, 0666);
-		dup2(data->here_doc_fd, 0);
-		unlink("temp_file_frog");
-	}
 	if (arr_length(data->commands) == 1)
 	{
-		redirect_output(data);
-		if (data->srcin == 1)
-		{
-			if (redirect_input(data))
-				return ;
-		}
+		if (set_data(data, 0, 0, 0))
+			return ;
 		execute_single_command(data);
 	}
 	else
