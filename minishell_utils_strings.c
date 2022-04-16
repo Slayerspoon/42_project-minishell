@@ -6,7 +6,7 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:14:08 by aionescu          #+#    #+#             */
-/*   Updated: 2022/03/20 21:43:32 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/16 19:24:38 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,18 @@ char	*word_to_string(char *start_ptr)
 		index++;
 	}
 	return (str);
+}
+
+/* Returns the number of strings in an array of strings. */
+int	count_strings(char **terminal_input)
+{
+	int	count;
+
+	count = 0;
+	if (terminal_input != NULL)
+	{
+		while (terminal_input[count] != NULL)
+		count++;
+	}
+	return (count);
 }

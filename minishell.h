@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/15 18:32:57 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/16 19:26:35 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,32 @@ char	**input_to_strings(char *input, char **envp);
 /* minishell_utils_strings.c */
 char	*ft_strjoin_three(char *first, char *second, char *third);
 char	*word_to_string(char *start_ptr);
+int		count_strings(char **terminal_input);
 
 /* minishell_utils_env.c */
 char	*get_val_of_key(char *key_value_pair);
 char	*get_env_var(char *var_name, char **envp);
+
+/* minishell_utils_misc.c */
+int		count_pipes(char **terminal_array);
+
+/* redirection_checks.c */
+int		check_double_brackets(char **term_input, int term_index);
+int		check_single_brackets(char **term_input, int term_index);
+int		is_redirection(char **term_input, int term_index);
+int		check_for_redirections(char **term_input, int term_index);
+
+/* generate_commands_array.c */
+char	***init_commands_array(int nelem);
+int		check_for_redirections(char **terminal_input, int terminal_index);
+char	**generate_command(char **terminal_input, int terminal_index, int nel);
+char	***generate_commands_array(char **term_input);
+
+/* generate_redirections_array.c */
+char	***init_redirections_array(int nelem);
+void	insert_redirection(char **redir_arr, int nel, char **t_inp, int t_ind);
+char	**generate_redirection(char **term_input, int term_i, int nelem);
+char	***generate_redirections_array(char **term_input);
 
 //execute_utils.c and execute.c
 char	*append_char(char *line, char c);
