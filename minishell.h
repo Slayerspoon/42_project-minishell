@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/06 14:01:38 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/06 22:35:36 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 
 typedef struct s_data
 {
-	char	***commands; // format of [[command1, flag1, flag2], [command2, flag1, flag2]], malloc'd
-	char	***redirects; // format of [["<<", "frog"], [">", "file"], [NULL]] - NULL if no redirection for command at that index
+	char	***commands; // format of [[command1, flag1, flag2, NULL], [command2, flag1, flag2, NULL], NULL], malloc'd
+	char	***redirects; // format of [["<<", "frog"], [">", "file"], [NULL]] - NULL if no redirection for command at that index < infile cmd1 arg1 | cmd2 arg2 | cmd3 arg3 > outfile1 > outfile2 [[<, infile, NULL], [NULL], [>, outfile1, >, outfile2, NULL], NULL]
 	char	**envp; // just envp
 	char	**path; // path, malloc'd, used in execution
 	char	*limiter; // limiter in case of '<<', otherwise NULL
