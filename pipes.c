@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 17:43:00 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/06 17:06:23 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/11 14:31:07 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ void	handle_pipes(int *fd, t_data *data)
 
 void	pipe_first_command(int *fd, t_data *data)
 {
-	int	fd_file;
-
 	dup2(fd[1], 1);
 	close(fd[0]);
 	if (!set_data(data, 0, 0, 0))

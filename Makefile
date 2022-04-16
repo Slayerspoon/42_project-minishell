@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/02 19:14:52 by aionescu          #+#    #+#              #
-#    Updated: 2022/03/20 21:18:28 by aionescu         ###   ########.fr        #
+#    Updated: 2022/04/15 18:29:52 by kpucylo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,12 @@ NAME = minishell
 
 LIBFT = libft.a
 
-SRC = minishell_main.c check_quotes.c minishell_utils_strings.c \
+SRC = main.c check_quotes.c minishell_utils_strings.c \
 		minishell_utils_env.c minishell_quoted_to_text.c \
-		join_quoted_and_adjacent.c input_to_strings.c
+		join_quoted_and_adjacent.c input_to_strings.c \
+		execute_utils.c execute.c here_doc.c input_output.c \
+		misc.c pipes.c redirects_utils.c redirects.c signals.c \
+		struct_handling.c builtins.c export_unset.c export_unset2.c
 
 all: $(NAME)
 
