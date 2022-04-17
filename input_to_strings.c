@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 18:56:37 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/17 18:05:44 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/17 21:00:41 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,19 @@ char	*generate_string(char *start_ptr, char **envp, t_data *data)
 {
 	char	*new_str;
 	char	quote;
+	char	*temp;
 
-	if (has_quote(start_ptr))
-	{
-		quote = what_is_next_quote(start_ptr);
-		new_str = join_quoted(start_ptr, quote, envp, data);
-	}
-	else
+	temp = start_ptr;
+	if (!has_quote(start_ptr))
 		new_str = word_to_string(start_ptr, envp, data);
+	while (has_quote(temp))
+	{
+		quote = what_is_next_quote(temp);
+		new_str = join_quoted(temp, quote, envp, data);
+		if (temp != start_ptr)
+			free(temp);
+		temp = new_str;
+	}
 	return (new_str);
 }
 

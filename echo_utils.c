@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 14:40:29 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/17 14:59:09 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/17 20:15:19 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	echo_flag(char **cmd, int *i)
 
 	flag = 0;
 	stop = 0;
+	if (!ft_strncmp(cmd[*i], "-n", 2) && ft_strlen(cmd[*i]) == 2)
+		flag = 1;
 	while (cmd[*i] && ft_strnstr(cmd[*i], "-n", 2))
 	{
 		j = 2;
