@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils_misc.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 19:49:47 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/13 19:52:39 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/16 22:06:35 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,44 @@ int	count_pipes(char **terminal_array)
 		index++;
 	}
 	return (pipes);
+}
+
+void	parse(char *str, t_data *data)
+{
+	char	**temp;
+
+	temp = input_to_strings(str, data->envp);
+	data->commands = generate_commands_array(temp);
+	data->redirects = generate_redirections_array(temp);
+	data->pipes = count_pipes(temp);
+}
+
+//fck the norm
+int	export_loop(char **cmd, t_data *data)
+{
+	int		i;
+	char	*str;
+	int		len;
+	int		retval;
+	int		size;
+
+	i = 1;
+	retval = 0;
+	while (cmd[i])
+	{
+		len = validity_check(cmd[i]);
+		if (!len)
+		{
+			retval = 1;
+			i++;
+			continue ;
+		}
+		str = ft_strdup(cmd[i]);
+		size = export2(cmd[i], data, len, str);
+		if (len)
+			data->envp = append_array(str, data->envp, size);
+		i++;
+		retval = 0;
+	}
+	return (retval);
 }

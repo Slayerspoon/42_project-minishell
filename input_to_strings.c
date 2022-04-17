@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_to_strings.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 18:56:37 by aionescu          #+#    #+#             */
-/*   Updated: 2022/03/20 21:38:34 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/16 19:49:43 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,6 @@ char	**input_to_strings(char *input, char **envp)
 			index = index + final_string_length(input + index);
 		}
 	}
+	array_of_strings[count] = NULL;
 	return (array_of_strings);
 }

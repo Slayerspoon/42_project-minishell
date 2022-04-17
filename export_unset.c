@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 16:32:14 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/15 19:45:14 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/16 22:08:42 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	validity_check(char *str)
 	}
 	ft_putstr_fd("export: ", 2);
 	ft_putstr_fd(str, 2);
-	ft_putstr_fd(": not a valid identifier", 2);
+	ft_putstr_fd(": not a valid identifier\n", 2);
 	return (0);
 }
 
@@ -63,33 +63,24 @@ int	export2(char *cmd, t_data *data, int len, char *str)
 		}
 		i++;
 	}
-	return (len);
+	return (i);
 }
 
 int	export(char **cmd, t_data *data)
 {
-	int		i;
-	int		len;
-	int		retval;
-	char	*str;
+	int	retval;
+	int	i;
 
-	i = 1;
-	retval = 0;
-	while (cmd[i])
+	if (!cmd[1])
 	{
-		len = validity_check(cmd[i]);
-		if (!len)
+		i = 0;
+		while (data->envp[i])
 		{
-			retval = 1;
-			continue ;
+			printf("declare -x %s\n", data->envp[i]);
+			i++;
 		}
-		str = ft_strdup(cmd[i]);
-		len = export2(cmd[i], data, len, str);
-		if (len)
-			data->envp = append_array(str, data->envp, i);
-		i++;
-		retval = 0;
 	}
+	retval = export_loop(cmd, data);
 	return (retval);
 }
 
@@ -105,8 +96,10 @@ int	unset(char **cmd, t_data *data)
 	{
 		retval = unset_error(cmd[i]);
 		if (retval)
+		{
+			i++;
 			continue ;
-		i = 0;
+		}
 		len = (int)ft_strlen(cmd[i]);
 		unset2(data, cmd[i], len);
 		i++;

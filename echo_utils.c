@@ -1,41 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   echo_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/11 13:20:15 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/17 15:40:39 by kpucylo          ###   ########.fr       */
+/*   Created: 2022/04/17 14:40:29 by kpucylo           #+#    #+#             */
+/*   Updated: 2022/04/17 14:59:09 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "minishell.h"
 
-void	handle_signal(int sig)
+int	echo_flag(char **cmd, int *i)
 {
-	if (sig == SIGINT)
-	{
-		g_flag[1] = 1;
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-	else if (sig == SIGQUIT)
-	{
-		rl_on_new_line();
-	}
-}
+	int	flag;
+	int	j;
+	int	stop;
 
-int	catch_signal(int sig, void (*handler)(int))
-{
-	struct sigaction	sa;
-
-	sigemptyset(&sa.sa_mask);
-	sigaddset(&sa.sa_mask, sig);
-	sa.sa_handler = handler;
-	sa.sa_flags = 0;
-	return (sigaction(sig, &sa, NULL));
+	flag = 0;
+	stop = 0;
+	while (cmd[*i] && ft_strnstr(cmd[*i], "-n", 2))
+	{
+		j = 2;
+		while (cmd[*i][j] == 'n' && !stop)
+		{
+			if (cmd[*i][j + 1] && cmd[*i][j + 1] != 'n')
+				stop = 1;
+			if (!cmd[*i][j + 1])
+				flag = 1;
+			j++;
+		}
+		if (stop)
+			break ;
+		(*i)++;
+	}
+	return (flag);
 }

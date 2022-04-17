@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_checks.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 21:02:03 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/15 21:34:02 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/16 20:04:34 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

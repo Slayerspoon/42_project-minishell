@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:37:43 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/15 16:54:55 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/17 15:47:24 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,7 @@ int	echo(char **cmd)
 
 	i = 1;
 	flag = 0;
-	if (cmd[1] && ft_strnstr(cmd[1], "-n", 2) && ft_strlen(cmd[1]) == 2)
-	{
-		flag = 1;
-		i++;
-	}
+	flag = echo_flag(cmd, &i);
 	while (cmd[i])
 	{
 		printf("%s", cmd[i]);
@@ -42,7 +38,7 @@ int	cd(char **cmd, t_data *data)
 	int	error;
 
 	if (!cmd[1])
-		error = chdir(get_env_var("HOME", data->envp));
+		error = chdir(get_env_var("HOME", data->envp, data));
 	else
 		error = chdir(cmd[1]);
 	if (error == -1)

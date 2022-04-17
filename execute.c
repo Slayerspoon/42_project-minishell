@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 15:31:14 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/15 18:12:08 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/16 21:23:43 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,20 @@ int	execute_built_in(t_data *data, int index)
 	char	*name;
 
 	name = data->commands[index][0];
-	if (ft_strncmp(name, "echo", 4) && ft_strlen(name) == 4)
+	if (!ft_strncmp(name, "echo", 4) && ft_strlen(name) == 4)
 		return (data->exit_status = echo(data->commands[index]));
-	if (ft_strncmp(name, "cd", 2) && ft_strlen(name) == 2)
+	if (!ft_strncmp(name, "cd", 2) && ft_strlen(name) == 2)
 		return (data->exit_status = cd(data->commands[index], data));
-	if (ft_strncmp(name, "pwd", 3) && ft_strlen(name) == 3)
+	if (!ft_strncmp(name, "pwd", 3) && ft_strlen(name) == 3)
 		return (data->exit_status = pwd(data->commands[index]));
-	if (ft_strncmp(name, "env", 3) && ft_strlen(name) == 3)
+	if (!ft_strncmp(name, "env", 3) && ft_strlen(name) == 3)
 		return (data->exit_status = env(data->commands[index], data));
-	if (ft_strncmp(name, "exit", 4) && ft_strlen(name) == 4)
+	if (!ft_strncmp(name, "exit", 4) && ft_strlen(name) == 4)
 		return (data->exit_status = ft_exit(data->commands[index], data));
-	if (ft_strncmp(name, "export", 6) && ft_strlen(name) == 6)
+	if (!ft_strncmp(name, "export", 6) && ft_strlen(name) == 6)
 		return (data->exit_status = export(data->commands[index], data));
+	if (!ft_strncmp(name, "unset", 5) && ft_strlen(name) == 5)
+		return (data->exit_status = unset(data->commands[index], data));
 	return (-1);
 }
 

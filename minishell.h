@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/16 19:26:35 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/17 15:45:41 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,20 @@
 
 typedef struct s_data
 {
-	char	***commands; // format of [[command1, flag1, flag2], [command2, flag1, flag2]], malloc'd
-	char	***redirects; // format of [["<<", "frog"], [">", "file"], [NULL]] - NULL if no redirection for command at that index
-	char	**envp; // just envp
-	char	**path; // path, malloc'd, used in execution
-	char	*limiter; // limiter in case of '<<', otherwise NULL
-	int		srcin; // 1 means '<' redirection, 2 means '<<' redirection
-	int		srcout; // 1 means '>' redirection, 2 means '>>' redirection
-	int		srcerr; // 1 means '>' redirection, 2 means '>>' redirection
-	// Important to remember - 2> or 2>> redirects error instead of output
-	// and in the same way &> redirects both out and err
-	int		here_doc_fd; // used in execution
-	char	*nameout; // name of the output file if needed, else NULL
-	char	*namein; // name of the input file if needed, else NULL
-	char	*namerr; // name of the error file if needed, else NULL
-	int		pipes; // number of pipes
-	int		exit_status; // exit status of last command, used in execution
+	char	***commands;
+	char	***redirects;
+	char	**envp;
+	char	**path;
+	char	*limiter;
+	int		srcin;
+	int		srcout;
+	int		srcerr;
+	int		here_doc_fd;
+	char	*nameout;
+	char	*namein;
+	char	*namerr;
+	int		pipes;
+	int		exit_status;
 	int		orig_fds[3];
 }	t_data;
 
@@ -55,6 +53,8 @@ enum
 	ERR,
 	BOTH
 };
+
+extern int	g_flag[2];
 
 /* check_quotes.c */
 char	what_is_next_quote(char *str);
@@ -92,6 +92,8 @@ char	*get_env_var(char *var_name, char **envp);
 
 /* minishell_utils_misc.c */
 int		count_pipes(char **terminal_array);
+void	parse(char *str, t_data *data);
+int		export_loop(char **cmd, t_data *data);
 
 /* redirection_checks.c */
 int		check_double_brackets(char **term_input, int term_index);
@@ -163,8 +165,9 @@ void	handle_signal(int sig);
 //struct_handling.c
 void	init(t_data *data, char **envp, int mode);
 
-//builtins.c, export_unset.c and export_unset2.c
+//builtins.c, echo_utils.c, export_unset.c and export_unset2.c 
 int		echo(char **cmd);
+int		echo_flag(char **cmd, int *i);
 int		cd(char **cmd, t_data *data);
 int		pwd(char **cmd);
 int		env(char **cmd, t_data *data);
@@ -172,6 +175,10 @@ int		ft_exit(char **cmd, t_data *data);
 int		export(char **cmd, t_data *data);
 void	unset2(t_data *data, char *cmd, int len);
 int		unset_error(char *str);
+int		unset(char **cmd, t_data *data);
+int		validity_check(char *str);
+int		export2(char *cmd, t_data *data, int len, char *str);
+char	**append_array(char *str, char **array, int size);
 
 //main.c
 char	**copy_array(char **array);
