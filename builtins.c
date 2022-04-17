@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:37:43 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/15 16:54:55 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/17 14:51:56 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	cd(char **cmd, t_data *data)
 	int	error;
 
 	if (!cmd[1])
-		error = chdir(get_env_var("HOME", data->envp));
+		error = chdir(get_env_var("HOME", data->envp, data));
 	else
 		error = chdir(cmd[1]);
 	if (error == -1)

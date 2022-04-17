@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_quoted_to_text.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 20:19:50 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/05 19:22:27 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/17 14:47:11 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,17 @@ char	*identify_env_var(char *start_ptr)
 
 	start_ptr++;
 	chars = 0;
-	while (start_ptr[chars] != ' ' && start_ptr[chars] != '\"')
+	while (start_ptr[chars] != ' ' && start_ptr[chars] != '\"'
+		&& start_ptr[chars] != '\0' && start_ptr[chars] != '\t')
 		chars++;
 	identified_name = ft_calloc(chars + 1, sizeof(char));
 	chars = 0;
-	while (start_ptr[chars] != ' ' && start_ptr[chars] != '\"')
+	while (start_ptr[chars] != ' ' && start_ptr[chars] != '\"'
+		&& start_ptr[chars] != '\0' && start_ptr[chars] != '\t')
 	{
 		identified_name[chars] = start_ptr[chars];
 		chars++;
 	}
-	printf("Here: %s\n", identified_name);
 	return (identified_name);
 }
 
@@ -58,7 +59,7 @@ char	*single_quoted_to_text(char *original)
 	return (new);
 }
 
-char	*double_quoted_to_text(char	*original, char **envp)
+char	*double_quoted_to_text(char	*original, char **envp, t_data *data)
 {
 	char	*new;
 	char	*temp;
@@ -74,7 +75,7 @@ char	*double_quoted_to_text(char	*original, char **envp)
 		else
 		{
 			env_var = identify_env_var(original + index);
-			ft_strlcat(temp, get_env_var(env_var, envp), 1000000);
+			ft_strlcat(temp, get_env_var(env_var, envp, data), 1000000);
 			free(env_var);
 			while (original[index] != ' ' && original[index] != '\"')
 				index++;
@@ -89,7 +90,7 @@ char	*double_quoted_to_text(char	*original, char **envp)
 
 /* Generates a string from the quoted text containing VALUES instead of KEYS. */
 /* Used on a pointer to the opening quote. */
-char	*quoted_to_text(char *original, char quote, char **envp)
+char	*quoted_to_text(char *original, char quote, char **envp, t_data *data)
 {
 	char	*new;
 
@@ -97,6 +98,6 @@ char	*quoted_to_text(char *original, char quote, char **envp)
 	if (quote == '\'')
 		new = single_quoted_to_text(original + 1);
 	else
-		new = double_quoted_to_text(original + 1, envp);
+		new = double_quoted_to_text(original + 1, envp, data);
 	return (new);
 }

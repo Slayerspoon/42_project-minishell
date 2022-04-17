@@ -6,7 +6,7 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:23:38 by aionescu          #+#    #+#             */
-/*   Updated: 2022/03/19 19:45:52 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/17 14:50:52 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*createstr_afterquote(char *start_ptr)
 
 /* Creates one string containing a quoted part and its adjacent characters. */
 /* !!! Input string has to be verified for adjacency BEFOREHAND !!! */
-char	*join_quoted_and_adjacent(char *start_ptr, char quote, char **envp)
+char	*join_quoted(char *start_ptr, char quote, char **envp, t_data *data)
 {
 	char	*beforequote_ptr;
 	char	*quoted_ptr;
@@ -90,7 +90,7 @@ char	*join_quoted_and_adjacent(char *start_ptr, char quote, char **envp)
 	while (start_ptr[index] != quote)
 		index++;
 	beforequote_ptr = createstr_beforequote(start_ptr);
-	quoted_ptr = quoted_to_text(&(start_ptr[index]), quote, envp);
+	quoted_ptr = quoted_to_text(&(start_ptr[index]), quote, envp, data);
 	afterquote_ptr = createstr_afterquote(start_ptr);
 	joined = ft_strjoin_three(beforequote_ptr, quoted_ptr, afterquote_ptr);
 	free(beforequote_ptr);

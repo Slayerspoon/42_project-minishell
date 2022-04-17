@@ -6,7 +6,7 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/16 19:26:35 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/17 14:50:19 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,30 +65,31 @@ int		check_all_quotes(char *str);
 char	*identify_env_var(char *start_ptr);
 char	*create_new_from_temp(char *temp);
 char	*single_quoted_to_text(char *original);
-char	*double_quoted_to_text(char	*original, char **envp);
-char	*quoted_to_text(char *original, char quote, char **envp);
+char	*double_quoted_to_text(char	*original, char **envp, t_data *data);
+char	*quoted_to_text(char *original, char quote, char **envp, t_data *data);
 
 /* join_quoted_and_adjacent.c */
 char	*createstr_beforequote(char *start_ptr);
 char	*find_afterquote(char *start_ptr);
 char	*createstr_afterquote(char *start_ptr);
-char	*join_quoted_and_adjacent(char *start_ptr, char quote, char **envp);
+char	*join_quoted(char *start_ptr, char quote, char **envp, t_data *data);
 
 /* input_to_strings.c */
 int		has_quote(char *start_ptr);
 int		final_string_length(char *start_ptr);
 int		count_needed_strings(char *input);
-char	*generate_string(char *start_ptr, char **envp);
-char	**input_to_strings(char *input, char **envp);
+char	*generate_string(char *start_ptr, char **envp, t_data *data);
+char	**input_to_strings(char *input, char **envp, t_data *data);
 
 /* minishell_utils_strings.c */
 char	*ft_strjoin_three(char *first, char *second, char *third);
-char	*word_to_string(char *start_ptr);
+void	merge_chars_and_env_val(char *merged, char *start_ptr, char *env_val);
+char	*word_to_string(char *start_ptr, char **envp, t_data *data);
 int		count_strings(char **terminal_input);
 
 /* minishell_utils_env.c */
 char	*get_val_of_key(char *key_value_pair);
-char	*get_env_var(char *var_name, char **envp);
+char	*get_env_var(char *var_name, char **envp, t_data *data);
 
 /* minishell_utils_misc.c */
 int		count_pipes(char **terminal_array);
