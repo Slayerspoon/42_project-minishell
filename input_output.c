@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 14:58:34 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/07 14:30:00 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/17 21:18:05 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ int	redirect_output(t_data *data)
 		if (fd_file_out == -1)
 			return (throw_error(data->nameout, -1));
 		else
+		{
 			dup_and_close(fd_file_out, 1);
+		}
 	}
 	if (data->srcerr != 0)
 	{

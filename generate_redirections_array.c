@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 20:51:56 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/17 18:50:32 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/17 22:11:23 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,23 +57,26 @@ void	insert_redirection(char **redir_arr, int nel, char **t_inp, int t_ind)
 char	**generate_redirection(char **term_input, int term_i, int nelem)
 {
 	char	**redirection_arr;
+	int		twice_nelem;
 
 	if (term_input[term_i] == NULL)
 		return (NULL);
-	redirection_arr = malloc((nelem + 1) * sizeof(char *));
-	while (nelem > 0)
+	twice_nelem = nelem * 2;
+	redirection_arr = malloc((twice_nelem + 1) * sizeof(char *));
+	while (twice_nelem > 0)
 	{
-		redirection_arr[nelem] = NULL;
-		nelem--;
+		redirection_arr[twice_nelem] = NULL;
+		twice_nelem--;
 	}
-	redirection_arr[nelem] = NULL;
+	redirection_arr[twice_nelem] = NULL;
 	while (ft_strncmp(term_input[term_i], "|\0", 2) != 0
 		&& term_input[term_i] != NULL)
 	{
 		if (is_redirection(term_input, term_i) > 0)
 		{
-			insert_redirection(redirection_arr, nelem, term_input, term_i);
-			nelem = nelem + 2;
+			insert_redirection(redirection_arr, twice_nelem, term_input, \
+				term_i);
+			twice_nelem = twice_nelem + 2;
 		}
 		term_i = term_i + 1 + (is_redirection(term_input, term_i) / 2);
 	}
