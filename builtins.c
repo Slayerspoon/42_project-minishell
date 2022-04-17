@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:37:43 by kpucylo           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/04/17 15:47:24 by kpucylo          ###   ########.fr       */
+=======
+/*   Updated: 2022/04/17 14:51:56 by aionescu         ###   ########.fr       */
+>>>>>>> f626d3b5ee393cf3b51be6aebee70ef1b51613bd
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -6,7 +6,11 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 18:56:37 by aionescu          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/04/16 19:49:43 by kpucylo          ###   ########.fr       */
+=======
+/*   Updated: 2022/04/17 14:58:01 by aionescu         ###   ########.fr       */
+>>>>>>> f626d3b5ee393cf3b51be6aebee70ef1b51613bd
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +88,7 @@ int	count_needed_strings(char *input)
 }
 
 /* Generates and returns the next string for the array of strings. */
-char	*generate_string(char *start_ptr, char **envp)
+char	*generate_string(char *start_ptr, char **envp, t_data *data)
 {
 	char	*new_str;
 	char	quote;
@@ -92,22 +96,22 @@ char	*generate_string(char *start_ptr, char **envp)
 	if (has_quote(start_ptr))
 	{
 		quote = what_is_next_quote(start_ptr);
-		new_str = join_quoted_and_adjacent(start_ptr, quote, envp);
+		new_str = join_quoted(start_ptr, quote, envp, data);
 	}
 	else
-		new_str = word_to_string(start_ptr);
+		new_str = word_to_string(start_ptr, envp, data);
 	return (new_str);
 }
 
 /* Generates an array of strings based on the terminal input. */
-char	**input_to_strings(char *input, char **envp)
+char	**input_to_strings(char *input, char **envp, t_data *data)
 {
-	char	**array_of_strings;
+	char	**array_of_strs;
 	size_t	index;
 	int		count;
 
 	count = count_needed_strings(input);
-	array_of_strings = malloc(sizeof(char *) * (count + 1));
+	array_of_strs = malloc(sizeof(char *) * (count + 1));
 	count = 0;
 	index = 0;
 	while (input[index] != '\0')
@@ -116,11 +120,15 @@ char	**input_to_strings(char *input, char **envp)
 			index++;
 		else
 		{
-			array_of_strings[count] = generate_string(input + index, envp);
+			array_of_strs[count] = generate_string(input + index, envp, data);
 			count++;
 			index = index + final_string_length(input + index);
 		}
 	}
+<<<<<<< HEAD
 	array_of_strings[count] = NULL;
 	return (array_of_strings);
+=======
+	return (array_of_strs);
+>>>>>>> f626d3b5ee393cf3b51be6aebee70ef1b51613bd
 }
