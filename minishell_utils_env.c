@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils_env.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:55:30 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/17 14:42:18 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/17 16:14:44 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*get_env_var(char *var_name, char **envp, t_data *data)
 	index = 0;
 	while (envp[index] != NULL)
 	{
-		if (ft_strncmp(envp[index], var_name, ft_strlen(var_name) == 0)
+		if (ft_strncmp(envp[index], var_name, ft_strlen(var_name)) == 0
 			&& ft_strnstr(envp[index], "=", ft_strlen(var_name) + 1))
 		{
 			var_value = get_val_of_key(envp[index]);

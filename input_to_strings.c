@@ -6,11 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 18:56:37 by aionescu          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/04/16 19:49:43 by kpucylo          ###   ########.fr       */
-=======
-/*   Updated: 2022/04/17 14:58:01 by aionescu         ###   ########.fr       */
->>>>>>> f626d3b5ee393cf3b51be6aebee70ef1b51613bd
+/*   Updated: 2022/04/17 18:05:44 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +121,6 @@ char	**input_to_strings(char *input, char **envp, t_data *data)
 			index = index + final_string_length(input + index);
 		}
 	}
-<<<<<<< HEAD
-	array_of_strings[count] = NULL;
-	return (array_of_strings);
-=======
+	array_of_strs[count] = NULL;
 	return (array_of_strs);
->>>>>>> f626d3b5ee393cf3b51be6aebee70ef1b51613bd
 }

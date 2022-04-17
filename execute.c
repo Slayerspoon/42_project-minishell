@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 15:31:14 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/16 21:23:43 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/17 18:17:37 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,13 @@ void	exec_command(char **parsed, t_data *data)
 			free(full_path);
 		}
 	}
-	perror(parsed[0]);
+	if (parsed[0][0] != '\0')
+		perror(parsed[0]);
+	else
+	{
+		free_arr(parsed);
+		exit(0);
+	}
 	free_arr(parsed);
 	exit(1);
 }

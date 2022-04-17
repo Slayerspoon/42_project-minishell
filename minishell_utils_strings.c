@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils_strings.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:14:08 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/17 14:41:30 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/17 18:13:19 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	merge_chars_and_env_val(char *merged, char *start_ptr, char *env_val)
 		if (start_ptr[index] == '$')
 		{
 			ft_strlcat(merged, env_val, index + ft_strlen(env_val) + 1);
-			free(env_val);
 			break ;
 		}
 		merged[index] = start_ptr[index];
 		index++;
 	}
+	free(env_val);
 }
 
 /* Reads until '\0' or ' ' or '\t' and creates and returns a string from it. */

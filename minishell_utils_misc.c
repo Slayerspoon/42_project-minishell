@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 19:49:47 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/16 22:06:35 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/17 18:47:29 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ void	parse(char *str, t_data *data)
 {
 	char	**temp;
 
-	temp = input_to_strings(str, data->envp);
+	temp = input_to_strings(str, data->envp, data);
 	data->commands = generate_commands_array(temp);
 	data->redirects = generate_redirections_array(temp);
 	data->pipes = count_pipes(temp);
+	free_arr(temp);
 }
 
 //fck the norm
@@ -48,22 +49,20 @@ int	export_loop(char **cmd, t_data *data)
 	int		retval;
 	int		size;
 
-	i = 1;
+	i = 0;
 	retval = 0;
-	while (cmd[i])
+	while (cmd[++i])
 	{
 		len = validity_check(cmd[i]);
 		if (!len)
 		{
 			retval = 1;
-			i++;
 			continue ;
 		}
 		str = ft_strdup(cmd[i]);
 		size = export2(cmd[i], data, len, str);
-		if (len)
+		if (size)
 			data->envp = append_array(str, data->envp, size);
-		i++;
 		retval = 0;
 	}
 	return (retval);

@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:37:43 by kpucylo           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/04/17 15:47:24 by kpucylo          ###   ########.fr       */
-=======
-/*   Updated: 2022/04/17 14:51:56 by aionescu         ###   ########.fr       */
->>>>>>> f626d3b5ee393cf3b51be6aebee70ef1b51613bd
+/*   Updated: 2022/04/17 18:33:12 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +35,15 @@ int	echo(char **cmd)
 
 int	cd(char **cmd, t_data *data)
 {
-	int	error;
+	int		error;
+	char	*chdirpath;
 
+	chdirpath = get_env_var("HOME", data->envp, data);
 	if (!cmd[1])
-		error = chdir(get_env_var("HOME", data->envp, data));
+		error = chdir(chdirpath);
 	else
 		error = chdir(cmd[1]);
+	free(chdirpath);
 	if (error == -1)
 	{
 		perror("cd");

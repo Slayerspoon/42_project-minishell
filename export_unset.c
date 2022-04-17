@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 16:32:14 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/16 22:08:42 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/17 18:47:40 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ int	validity_check(char *str)
 		i = -1;
 	while (i >= 0 && str[i])
 	{
-		if (str[i] == '=')
+		if (str[i] == '=' && str[i + 1])
 			return (i);
+		else if (str[i] == '=')
+			return (0);
 		if (!ft_isalnum(str[i]))
 			break ;
 		i++;

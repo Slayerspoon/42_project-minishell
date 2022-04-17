@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/02 19:14:52 by aionescu          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2022/04/17 14:48:34 by kpucylo          ###   ########.fr        #
-=======
-#    Updated: 2022/04/17 14:50:30 by aionescu         ###   ########.fr        #
->>>>>>> f626d3b5ee393cf3b51be6aebee70ef1b51613bd
+#    Updated: 2022/04/17 15:57:18 by kpucylo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

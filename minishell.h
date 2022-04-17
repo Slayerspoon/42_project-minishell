@@ -6,11 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/04/17 15:45:41 by kpucylo          ###   ########.fr       */
-=======
-/*   Updated: 2022/04/17 14:50:19 by aionescu         ###   ########.fr       */
->>>>>>> f626d3b5ee393cf3b51be6aebee70ef1b51613bd
+/*   Updated: 2022/04/17 18:50:37 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +65,7 @@ int		check_all_quotes(char *str);
 char	*identify_env_var(char *start_ptr);
 char	*create_new_from_temp(char *temp);
 char	*single_quoted_to_text(char *original);
-char	*double_quoted_to_text(char	*original, char **envp, t_data *data);
+char	*double_quoted_to_text(char *original, char **envp, t_data *data);
 char	*quoted_to_text(char *original, char quote, char **envp, t_data *data);
 
 /* join_quoted_and_adjacent.c */

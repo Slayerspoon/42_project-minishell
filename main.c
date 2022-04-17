@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:50:25 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/17 15:42:51 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/17 17:37:42 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ void	get_input(char **line)
 {
 	char	*prompt;
 
-	catch_signal(SIGINT, handle_signal);
-	catch_signal(SIGQUIT, handle_signal);
 	prompt = get_prompt();
 	if (!(g_flag[0] && g_flag[1]))
 	{
@@ -110,6 +108,8 @@ int	main(int argc, char **argv, char **envp)
 	data = malloc(sizeof(t_data));
 	init(data, envp, 0);
 	data->exit_status = 0;
+	catch_signal(SIGINT, handle_signal);
+	catch_signal(SIGQUIT, handle_signal);
 	while (1)
 	{
 		get_input(&line);

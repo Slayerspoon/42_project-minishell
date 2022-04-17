@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 20:51:56 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/16 20:02:32 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/17 18:50:32 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ char	***generate_redirections_array(char **term_input)
 	term_indx = 0;
 	while (term_input[term_indx] != NULL)
 	{
-		// printf("frog\n");
 		redir_array[arri] = generate_redirection(term_input, term_indx, nelem);
 		while (ft_strncmp(term_input[term_indx], "|\0", 2) != 0
 			&& term_input[term_indx] != NULL)
