@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:37:43 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/17 18:33:12 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/18 15:34:56 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	echo(char **cmd)
 	flag = echo_flag(cmd, &i);
 	while (cmd[i])
 	{
-		printf("%s", cmd[i]);
+		ft_putstr_fd(cmd[i], 1);
 		if (cmd[i + 1])
-			printf(" ");
+			ft_putstr_fd(" ", 1);
 		i++;
 	}
 	if (!flag)
-		printf("\n");
+		ft_putstr_fd("\n", 1);
 	return (0);
 }
 

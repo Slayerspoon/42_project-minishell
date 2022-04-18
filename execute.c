@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 15:31:14 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/17 22:17:57 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/18 15:30:13 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,8 @@ void	execute_line(t_data *data)
 	{
 		while (data->redirects[i])
 		{
-			set_data(data, i, 0, 0);
+			if (set_data(data, i, 0, 0))
+				return ;
 			i++;
 		}
 		return ;

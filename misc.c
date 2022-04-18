@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 16:16:33 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/17 21:36:00 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/18 15:58:12 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	throw_error(char *str, int code)
 void	dup_and_close(int fd1, int fd2)
 {
 	dup2(fd1, fd2);
-	close (fd1);
+	close(fd1);
 }
 
 void	set_null(t_data *data)
