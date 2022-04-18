@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 18:56:37 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/18 16:46:37 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/18 18:21:57 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ char	**input_to_strings(char *input, char **envp, t_data *data)
 		else
 		{
 			array_of_strs[count] = generate_string(input + index, envp, data);
+			if (has_quote(input + index))
+				add_marking_q(&(array_of_strs[count]));
 			count++;
 			index = index + final_string_length(input + index);
 		}

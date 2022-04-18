@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/17 18:50:37 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/18 18:09:16 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,12 @@ char	*get_env_var(char *var_name, char **envp, t_data *data);
 int		count_pipes(char **terminal_array);
 void	parse(char *str, t_data *data);
 int		export_loop(char **cmd, t_data *data);
+
+/* markings.c */
+void	add_marking_q(char **str);
+int		has_marking_q(char *str);
+void	remove_marking_q(char **str);
+char	*dup_without_marking_q(char *str);
 
 /* redirection_checks.c */
 int		check_double_brackets(char **term_input, int term_index);

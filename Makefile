@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+         #
+#    By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/02 19:14:52 by aionescu          #+#    #+#              #
-#    Updated: 2022/04/17 15:57:18 by kpucylo          ###   ########.fr        #
+#    Updated: 2022/04/18 17:39:09 by aionescu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC = main.c check_quotes.c minishell_utils_strings.c \
 		misc.c pipes.c redirects_utils.c redirects.c signals.c \
 		struct_handling.c builtins.c export_unset.c export_unset2.c \
 		generate_commands_array.c generate_redirections_array.c \
-		minishell_utils_misc.c redirection_checks.c echo_utils.c
+		minishell_utils_misc.c redirection_checks.c echo_utils.c markings.c
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 20:19:50 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/17 14:47:11 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/18 17:51:53 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ char	*identify_env_var(char *start_ptr)
 	start_ptr++;
 	chars = 0;
 	while (start_ptr[chars] != ' ' && start_ptr[chars] != '\"'
-		&& start_ptr[chars] != '\0' && start_ptr[chars] != '\t')
+		&& start_ptr[chars] != '\0' && start_ptr[chars] != '\t'
+		&& start_ptr[chars] != '$')
 		chars++;
 	identified_name = ft_calloc(chars + 1, sizeof(char));
 	chars = 0;
 	while (start_ptr[chars] != ' ' && start_ptr[chars] != '\"'
-		&& start_ptr[chars] != '\0' && start_ptr[chars] != '\t')
+		&& start_ptr[chars] != '\0' && start_ptr[chars] != '\t'
+		&& start_ptr[chars] != '$')
 	{
 		identified_name[chars] = start_ptr[chars];
 		chars++;
@@ -59,29 +61,29 @@ char	*single_quoted_to_text(char *original)
 	return (new);
 }
 
-char	*double_quoted_to_text(char	*original, char **envp, t_data *data)
+char	*double_quoted_to_text(char	*orig, char **envp, t_data *data)
 {
 	char	*new;
 	char	*temp;
 	char	*env_var;
-	size_t	index;
+	size_t	i;
 
 	temp = ft_calloc(1000000, 1);
-	index = 0;
-	while (original[index] != '\"')
+	i = 0;
+	while (orig[i] != '\"')
 	{
-		if (original[index] != '$')
-			ft_strlcat(temp, original + index, ft_strlen(temp) + 2);
+		if (orig[i] != '$')
+			ft_strlcat(temp, orig + i, ft_strlen(temp) + 2);
 		else
 		{
-			env_var = identify_env_var(original + index);
+			env_var = identify_env_var(orig + i++);
 			ft_strlcat(temp, get_env_var(env_var, envp, data), 1000000);
 			free(env_var);
-			while (original[index] != ' ' && original[index] != '\"')
-				index++;
-			index--;
+			while (orig[i] != ' ' && orig[i] != '\"' && orig[i] != '$')
+				i++;
+			i--;
 		}
-		index++;
+		i++;
 	}
 	new = create_new_from_temp(temp);
 	free(temp);
