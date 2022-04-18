@@ -6,7 +6,7 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 20:12:20 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/15 21:31:53 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/18 18:07:43 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	**generate_command(char **t_input, int t_index, int nel)
 		if (t_input[t_index] != NULL
 			&& ft_strncmp(t_input[t_index], "|\0", 2) != 0)
 		{
-			command_array[nel] = ft_strdup(t_input[t_index]);
+			command_array[nel] = dup_without_marking_q(t_input[t_index]);
 			nel++;
 			t_index++;
 		}

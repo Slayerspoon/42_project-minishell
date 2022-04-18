@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_to_strings.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 18:56:37 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/17 21:00:41 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/18 16:52:15 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ char	**input_to_strings(char *input, char **envp, t_data *data)
 		else
 		{
 			array_of_strs[count] = generate_string(input + index, envp, data);
+			if (has_quote(input + index))
+				add_marking_q(&(array_of_strs[count]));
 			count++;
 			index = index + final_string_length(input + index);
 		}
