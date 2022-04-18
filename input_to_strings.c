@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 18:56:37 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/18 18:21:57 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/18 18:41:57 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ char	**input_to_strings(char *input, char **envp, t_data *data)
 	index = 0;
 	while (input[index] != '\0')
 	{
-		printf("Here\n");
 		if (input[index] == ' ' || input[index] == '\t')
 			index++;
 		else
