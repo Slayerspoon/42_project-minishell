@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils_misc.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 19:49:47 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/17 18:47:29 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/19 19:24:35 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

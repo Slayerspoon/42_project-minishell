@@ -6,7 +6,7 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/18 18:09:16 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/19 20:44:45 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ char	*double_quoted_to_text(char *original, char **envp, t_data *data);
 char	*quoted_to_text(char *original, char quote, char **envp, t_data *data);
 
 /* join_quoted_and_adjacent.c */
-char	*createstr_beforequote(char *start_ptr);
+char	*createstr_beforequote(char *start_ptr, char **envp, t_data *data);
 char	*find_afterquote(char *start_ptr);
-char	*createstr_afterquote(char *start_ptr);
+char	*createstr_afterquote(char *start_ptr, char **envp, t_data *data);
 char	*join_quoted(char *start_ptr, char quote, char **envp, t_data *data);
 
 /* input_to_strings.c */
@@ -84,7 +84,7 @@ char	**input_to_strings(char *input, char **envp, t_data *data);
 /* minishell_utils_strings.c */
 char	*ft_strjoin_three(char *first, char *second, char *third);
 void	merge_chars_and_env_val(char *merged, char *start_ptr, char *env_val);
-char	*word_to_string(char *start_ptr, char **envp, t_data *data);
+char	*word_to_string(char *orig, char **envp, t_data *data);
 int		count_strings(char **terminal_input);
 
 /* minishell_utils_env.c */

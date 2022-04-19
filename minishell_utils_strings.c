@@ -6,7 +6,7 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:14:08 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/18 16:30:44 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/19 20:43:04 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,31 +51,32 @@ void	merge_chars_and_env_val(char *merged, char *start_ptr, char *env_val)
 }
 
 /* Reads until '\0' or ' ' or '\t' and creates and returns a string from it. */
-char	*word_to_string(char *start_ptr, char **envp, t_data *data)
+char	*word_to_string(char *orig, char **envp, t_data *data)
 {
-	char	*str;
+	char	*new;
+	char	*temp;
 	char	*env_var;
-	char	*env_val;
-	size_t	index;
+	size_t	i;
 
-	env_val = ft_calloc(1, sizeof(char));
-	index = 0;
-	while (start_ptr[index] != '\0' && start_ptr[index] != ' '
-		&& start_ptr[index] != '\t')
+	temp = ft_calloc(1000000, 1);
+	i = 0;
+	while (orig[i] != ' ' && orig[i] != '\t' && orig[i] != '\0'
+		&& orig[i] != '\'' && orig[i] != '\"')
 	{
-		if (start_ptr[index] == '$')
+		if (orig[i] != '$')
+			ft_strlcat(temp, orig + i, ft_strlen(temp) + 2);
+		else
 		{
-			env_var = identify_env_var(start_ptr + index);
-			free(env_val);
-			env_val = get_env_var(env_var, envp, data);
+			env_var = identify_env_var(orig + i);
+			i = i + ft_strlen(env_var);
+			ft_strlcat(temp, get_env_var(env_var, envp, data), 1000000);
 			free(env_var);
-			break ;
 		}
-		index++;
+		i++;
 	}
-	str = ft_calloc(index + ft_strlen(env_val) + 1, sizeof(char));
-	merge_chars_and_env_val(str, start_ptr, env_val);
-	return (str);
+	new = create_new_from_temp(temp);
+	free(temp);
+	return (new);
 }
 
 /* Returns the number of strings in an array of strings. */

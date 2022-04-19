@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:50:25 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/17 21:23:56 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/19 19:32:31 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	main(int argc, char **argv, char **envp)
 		get_input(&line);
 		if (!line)
 			clean_exit(data, 0, 0);
-		if (*line)
+		if (*line && check_all_quotes(line) == 0)
 		{
 			add_history(line);
 			parse(line, data);
@@ -122,6 +122,8 @@ int	main(int argc, char **argv, char **envp)
 			while (wait(0) != -1)
 				continue ;
 		}
+		else
+			ft_putstr_fd("Error: unclosed quotes.\n", 2);
 		cleanup(line, data);
 	}
 }

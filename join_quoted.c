@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   join_quoted_and_adjacent.c                         :+:      :+:    :+:   */
+/*   join_quoted.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:23:38 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/17 14:50:52 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/19 21:12:05 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "minishell.h"
 
 /* Creates a string containing only the characters before a quoted part. */
-char	*createstr_beforequote(char *start_ptr)
+char	*createstr_beforequote(char *start_ptr, char **envp, t_data *data)
 {
 	char	*beforequote;
 	char	quote;
@@ -24,13 +24,7 @@ char	*createstr_beforequote(char *start_ptr)
 	quote = what_is_next_quote(start_ptr);
 	while (start_ptr[index] != quote)
 		index++;
-	beforequote = ft_calloc(index + 1, sizeof(char));
-	index = 0;
-	while (start_ptr[index] != quote)
-	{
-		beforequote[index] = start_ptr[index];
-		index++;
-	}
+	beforequote = word_to_string(start_ptr, envp, data);
 	return (beforequote);
 }
 
@@ -56,23 +50,26 @@ char	*find_afterquote(char *start_ptr)
 }
 
 /* Creates a string containing only the characters after a quoted part. */
-char	*createstr_afterquote(char *start_ptr)
+char	*createstr_afterquote(char *start_ptr, char **envp, t_data *data)
 {
 	char	*afterquote_str;
 	char	*afterquote_ptr;
 	size_t	index;
+	size_t	sec_index;
 
 	afterquote_ptr = find_afterquote(start_ptr);
 	index = 0;
-	while (afterquote_ptr[index] != ' ' && afterquote_ptr[index] != '\0')
+	while (afterquote_ptr[index] != ' ' && afterquote_ptr[index] != '\0'
+		&& afterquote_ptr[index] != '\t' && afterquote_ptr[index] != '\''
+		&& afterquote_ptr[index] != '\"')
 		index++;
-	afterquote_str = ft_calloc(index + 1, sizeof(char));
-	index = 0;
-	while (afterquote_ptr[index] != ' ' && afterquote_ptr[index] != '\0')
-	{
-		afterquote_str[index] = afterquote_ptr[index];
-		index++;
-	}
+	sec_index = index;
+	while (afterquote_ptr[sec_index] != ' ' && afterquote_ptr[sec_index] != '\0'
+		&& afterquote_ptr[sec_index] != '\t')
+		sec_index++;
+	afterquote_str = word_to_string(afterquote_ptr, envp, data);
+	ft_strlcat(afterquote_str, afterquote_ptr + index, \
+		ft_strlen(afterquote_str) + sec_index - index + 1);
 	return (afterquote_str);
 }
 
@@ -89,9 +86,9 @@ char	*join_quoted(char *start_ptr, char quote, char **envp, t_data *data)
 	index = 0;
 	while (start_ptr[index] != quote)
 		index++;
-	beforequote_ptr = createstr_beforequote(start_ptr);
+	beforequote_ptr = createstr_beforequote(start_ptr, envp, data);
 	quoted_ptr = quoted_to_text(&(start_ptr[index]), quote, envp, data);
-	afterquote_ptr = createstr_afterquote(start_ptr);
+	afterquote_ptr = createstr_afterquote(start_ptr, envp, data);
 	joined = ft_strjoin_three(beforequote_ptr, quoted_ptr, afterquote_ptr);
 	free(beforequote_ptr);
 	free(quoted_ptr);

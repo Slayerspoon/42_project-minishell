@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   generate_redirections_array.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 20:51:56 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/17 22:11:23 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/18 20:50:18 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,14 @@ void	insert_redirection(char **redir_arr, int nel, char **t_inp, int t_ind)
 
 	if (is_redirection(t_inp, t_ind) == 2)
 	{
+		remove_marking_q(&t_inp[t_ind]);
 		redir_arr[nel] = ft_strdup(t_inp[t_ind]);
+		remove_marking_q(&t_inp[t_ind + 1]);
 		redir_arr[nel + 1] = ft_strdup(t_inp[t_ind + 1]);
 	}
 	else if (is_redirection(t_inp, t_ind) == 1)
 	{
+		remove_marking_q(&t_inp[t_ind]);
 		str_index = 0;
 		while (t_inp[t_ind][str_index] == '<' || t_inp[t_ind][str_index] == '>')
 			str_index++;

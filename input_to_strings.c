@@ -6,7 +6,7 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 18:56:37 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/18 16:52:15 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/19 20:34:40 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	has_quote(char *start_ptr)
 	{
 		if (start_ptr[index] == '\'' || start_ptr[index] == '\"')
 			quotes++;
-		if (start_ptr[index] == ' ')
+		if (start_ptr[index] == ' ' || start_ptr[index] == '\t')
 		{
 			if (quotes == 0)
 				return (0);
@@ -54,7 +54,8 @@ int	final_string_length(char *start_ptr)
 	{
 		if (start_ptr[index] == '\'' || start_ptr[index] == '\"')
 			quotes++;
-		if (start_ptr[index] == ' ' && quotes % 2 == 0)
+		if ((start_ptr[index] == ' ' || start_ptr[index] == '\t')
+			&& quotes % 2 == 0)
 			return (length);
 		length++;
 		index++;
@@ -72,7 +73,7 @@ int	count_needed_strings(char *input)
 	index = 0;
 	while (input[index] != '\0')
 	{
-		if (input[index] == ' ')
+		if (input[index] == ' ' || input[index] == '\t')
 			index++;
 		else
 		{
@@ -100,6 +101,8 @@ char	*generate_string(char *start_ptr, char **envp, t_data *data)
 		if (temp != start_ptr)
 			free(temp);
 		temp = new_str;
+		if (quote == '\'')
+			break ;
 	}
 	return (new_str);
 }
