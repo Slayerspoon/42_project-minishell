@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:50:25 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/20 16:54:34 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/20 18:14:39 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,15 +113,15 @@ int	main(int argc, char **argv, char **envp)
 		if (!line)
 			clean_exit(data, 0, 0);
 		add_history(line);
-		if (*line && check_all_quotes(line) == 0)
+		if (check_all_quotes(line) || ang_brackets_check(line))
+			ft_putstr_fd("Error: invalid input.\n", 2);
+		else if (*line && check_all_quotes(line) == 0)
 		{
 			parse(line, data);
 			execute_line(data);
 			while (wait(0) != -1)
 				continue ;
 		}
-		else if (check_all_quotes(line))
-			ft_putstr_fd("Error: unclosed quotes.\n", 2);
 		cleanup(line, data);
 	}
 }

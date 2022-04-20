@@ -6,7 +6,7 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:09:27 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/19 18:47:24 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/20 18:00:52 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,32 @@ int	check_all_quotes(char *str)
 
 	current_char_ptr = str;
 	while (42 == 42)
+	{
+		quote = what_is_next_quote(current_char_ptr);
+		if (quote == '\0')
+			return (0);
+		current_char_ptr = find_next_quote(current_char_ptr, quote);
+		if (*(current_char_ptr + 1) != '\0')
+			current_char_ptr = find_next_quote(current_char_ptr + 1, quote);
+		else
+			return (1);
+		if (current_char_ptr == NULL)
+			return (1);
+		current_char_ptr++;
+	}
+	return (0);
+}
+
+/* Returns 0 if *stop_ptr is not in quotes. */
+int	check_all_quotes_till(char *str, char *stop_ptr)
+{
+	char	quote;
+	char	*current_char_ptr;
+	int		count;
+
+	count = 0;
+	current_char_ptr = str;
+	while (current_char_ptr <= stop_ptr)
 	{
 		quote = what_is_next_quote(current_char_ptr);
 		if (quote == '\0')

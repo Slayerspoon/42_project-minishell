@@ -6,7 +6,7 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/19 20:44:45 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/20 18:03:18 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ extern int	g_flag[2];
 char	what_is_next_quote(char *str);
 char	*find_next_quote(char *str, char quote);
 int		check_all_quotes(char *str);
+int		check_all_quotes_till(char *str, char *stop_ptr);
+
+/* input_check.c */
+int		ang_brackets_conditions(char *input);
+int		ang_brackets_check(char *input);
 
 /* minishell_quoted_to_text.c */
 char	*identify_env_var(char *start_ptr);

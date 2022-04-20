@@ -6,7 +6,7 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 20:19:50 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/19 19:53:10 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/20 18:21:46 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ char	*identify_env_var(char *start_ptr)
 	size_t	chars;
 
 	start_ptr++;
+	if (*start_ptr == '?')
+	{
+		identified_name = ft_calloc(2, sizeof(char));
+		identified_name[0] = '?';
+		return (identified_name);
+	}
 	chars = 0;
 	while ('A' <= start_ptr[chars] && start_ptr[chars] <= 'Z')
 		chars++;
