@@ -6,7 +6,7 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 18:56:37 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/19 21:21:46 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/20 19:18:03 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,9 @@ char	*generate_string(char *start_ptr, char **envp, t_data *data)
 		if (temp != start_ptr)
 			free(temp);
 		temp = new_str;
-		if (quote == '\'')
-			break ;
+		// if (quote == '\'')
+		// 	break ;
+		printf("generate_string: new_str is $%s$\n", new_str);
 	}
 	return (new_str);
 }
