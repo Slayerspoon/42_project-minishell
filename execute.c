@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 15:31:14 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/18 15:30:13 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/20 13:47:38 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,22 +118,25 @@ void	execute_line(t_data *data)
 	int	i;
 
 	i = 0;
-	if (!data->commands[0])
+	if (data->commands)
 	{
-		while (data->redirects[i])
+		if (data->commands && !data->commands[0])
 		{
-			if (set_data(data, i, 0, 0))
-				return ;
-			i++;
-		}
-		return ;
-	}
-	if (arr_length(data->commands) == 1)
-	{
-		if (set_data(data, 0, 0, 0))
+			while (data->redirects[i])
+			{
+				if (set_data(data, i, 0, 0))
+					return ;
+				i++;
+			}
 			return ;
-		execute_single_command(data);
+		}
+		if (arr_length(data->commands) == 1)
+		{
+			if (set_data(data, 0, 0, 0))
+				return ;
+			execute_single_command(data);
+		}
+		else
+			execute_pipes(fd, data);
 	}
-	else
-		execute_pipes(fd, data);
 }
