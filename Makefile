@@ -6,7 +6,7 @@
 #    By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/02 19:14:52 by aionescu          #+#    #+#              #
-#    Updated: 2022/04/20 18:02:02 by aionescu         ###   ########.fr        #
+#    Updated: 2022/04/21 20:19:49 by aionescu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC = main.c check_quotes.c minishell_utils_strings.c \
 		struct_handling.c builtins.c export_unset.c export_unset2.c \
 		generate_commands_array.c generate_redirections_array.c \
 		minishell_utils_misc.c redirection_checks.c echo_utils.c markings.c \
-		input_check.c
+		input_check.c generate_string.c handle_quotes.c
 
 all: $(NAME)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_checks.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 21:02:03 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/16 20:04:34 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/21 22:57:36 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,19 @@ int	check_for_redirections(char **term_input, int term_index)
 			break ;
 	}
 	return (count);
+}
+
+int	has_clean_brackets(char *parsed_string)
+{
+	if ((((ft_strncmp(parsed_string, "<<", 2) == 0)
+				|| (ft_strncmp(parsed_string, ">>", 2) == 0))
+			&& ((ft_strncmp(parsed_string + 3, "<", 1) != 0)
+				&& (ft_strncmp(parsed_string + 3, ">", 1) != 0)))
+		|| (((ft_strncmp(parsed_string, "<", 1) == 0)
+				|| (ft_strncmp(parsed_string, ">", 1) == 0))
+			&& ((ft_strncmp(parsed_string + 2, "<", 1) != 0)
+				&& (ft_strncmp(parsed_string + 2, ">", 1) != 0))))
+		return (1);
+	else
+		return (0);
 }

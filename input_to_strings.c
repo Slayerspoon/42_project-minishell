@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_to_strings.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 18:56:37 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/20 22:10:12 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/21 22:23:33 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,14 +101,12 @@ char	*generate_string(char *start_ptr, char **envp, t_data *data)
 		if (temp != start_ptr)
 			free(temp);
 		temp = new_str;
-		// if (quote == '\'')
-		// 	break ;
 	}
 	return (new_str);
 }
 
 /* Generates an array of strings based on the terminal input. */
-char	**input_to_strings(char *input, char **envp, t_data *data)
+char	**input_to_strings(char *input, t_data *data)
 {
 	char	**array_of_strs;
 	size_t	index;
@@ -124,8 +122,9 @@ char	**input_to_strings(char *input, char **envp, t_data *data)
 			index++;
 		else
 		{
-			array_of_strs[count] = generate_string(input + index, envp, data);
-			if (has_quote(input + index))
+			array_of_strs[count] = parse_word(input + index, data);
+			if (has_quote(input + index)
+				&& has_clean_brackets(input + index) == 0)
 				add_marking_q(&(array_of_strs[count]));
 			count++;
 			index = index + final_string_length(input + index);

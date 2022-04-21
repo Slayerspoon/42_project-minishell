@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/20 20:51:13 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/21 22:58:29 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,14 @@ int		check_all_quotes_till(char *str, char *stop_ptr);
 int		ang_brackets_conditions(char *input, int index);
 int		ang_brackets_check(char *input);
 
+/* handle_quotes.c */
+int		handle_env_var(char *start, char *temp, t_data *data);
+int		handle_single_q(char *start, char *temp);
+int		handle_double_q(char *start, char *temp, t_data *data);
+
+/* generate_string.c */
+char	*parse_word(char *start_ptr, t_data *data);
+
 /* minishell_quoted_to_text.c */
 char	*identify_env_var(char *start_ptr);
 char	*create_new_from_temp(char *temp);
@@ -84,7 +92,7 @@ int		has_quote(char *start_ptr);
 int		final_string_length(char *start_ptr);
 int		count_needed_strings(char *input);
 char	*generate_string(char *start_ptr, char **envp, t_data *data);
-char	**input_to_strings(char *input, char **envp, t_data *data);
+char	**input_to_strings(char *input, t_data *data);
 
 /* minishell_utils_strings.c */
 char	*ft_strjoin_three(char *first, char *second, char *third);
@@ -112,6 +120,7 @@ int		check_double_brackets(char **term_input, int term_index);
 int		check_single_brackets(char **term_input, int term_index);
 int		is_redirection(char **term_input, int term_index);
 int		check_for_redirections(char **term_input, int term_index);
+int		has_clean_brackets(char *parsed_string);
 
 /* generate_commands_array.c */
 char	***init_commands_array(int nelem);

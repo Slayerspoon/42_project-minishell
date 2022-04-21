@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils_misc.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 19:49:47 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/20 22:06:37 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/21 20:26:40 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	parse(char *str, t_data *data)
 {
 	char	**temp;
 
-	temp = input_to_strings(str, data->envp, data);
+	temp = input_to_strings(str, data);
 	data->commands = generate_commands_array(temp);
 	data->redirects = generate_redirections_array(temp);
 	data->pipes = count_pipes(temp);

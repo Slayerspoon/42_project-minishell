@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_quoted_to_text.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 20:19:50 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/20 21:54:40 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/21 20:27:50 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ char	*identify_env_var(char *start_ptr)
 		return (identified_name);
 	}
 	chars = 0;
-	while ('A' <= start_ptr[chars] && start_ptr[chars] <= 'Z')
+	while (('A' <= start_ptr[chars] && start_ptr[chars] <= 'Z')
+		|| ('a' <= start_ptr[chars] && start_ptr[chars] <= 'z'))
 		chars++;
 	identified_name = ft_calloc(chars + 1, sizeof(char));
 	chars = 0;
-	while ('A' <= start_ptr[chars] && start_ptr[chars] <= 'Z')
+	while (('A' <= start_ptr[chars] && start_ptr[chars] <= 'Z')
+		|| ('a' <= start_ptr[chars] && start_ptr[chars] <= 'z'))
 	{
 		identified_name[chars] = start_ptr[chars];
 		chars++;
