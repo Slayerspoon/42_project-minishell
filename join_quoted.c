@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join_quoted.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:23:38 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/19 21:12:05 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/21 13:51:48 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ char	*createstr_afterquote(char *start_ptr, char **envp, t_data *data)
 {
 	char	*afterquote_str;
 	char	*afterquote_ptr;
+	char	*ptr;
 	size_t	index;
 	size_t	sec_index;
 
@@ -68,9 +69,16 @@ char	*createstr_afterquote(char *start_ptr, char **envp, t_data *data)
 		&& afterquote_ptr[sec_index] != '\t')
 		sec_index++;
 	afterquote_str = word_to_string(afterquote_ptr, envp, data);
-	ft_strlcat(afterquote_str, afterquote_ptr + index, \
-		ft_strlen(afterquote_str) + sec_index - index + 1);
-	return (afterquote_str);
+	ptr = ft_calloc(ft_strlen(afterquote_str) + \
+		ft_strlen(afterquote_ptr) + 1, 1);
+	ft_memcpy(ptr, afterquote_str, ft_strlen(afterquote_str));
+	// ptr = ft_strjoin(afterquote_str, afterquote_ptr + index);
+	ft_memmove(ptr + ft_strlen(ptr), afterquote_ptr + index, sec_index - index);
+	free(afterquote_str);
+	return (ptr);
+	// ft_strlcat(ptr, afterquote_ptr + index, \
+	// 	ft_strlen(afterquote_str) + sec_index - index + 1);
+	// return (afterquote_str);
 }
 
 /* Creates one string containing a quoted part and its adjacent characters. */

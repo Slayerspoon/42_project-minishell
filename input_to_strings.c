@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_to_strings.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 18:56:37 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/20 19:18:03 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/20 22:10:12 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ char	*generate_string(char *start_ptr, char **envp, t_data *data)
 		temp = new_str;
 		// if (quote == '\'')
 		// 	break ;
-		printf("generate_string: new_str is $%s$\n", new_str);
 	}
 	return (new_str);
 }

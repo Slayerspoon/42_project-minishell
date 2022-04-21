@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/20 20:07:12 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/20 20:51:13 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ void	free_3d_arr(char ***arr);
 //signals.c
 int		catch_signal(int sig, void (*handler)(int));
 void	handle_signal(int sig);
+char	*create_new_from_temp_free(char *temp);
 
 //struct_handling.c
 void	init(t_data *data, char **envp, int mode);

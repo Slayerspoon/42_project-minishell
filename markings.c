@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   markings.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:30:04 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/18 18:09:01 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/20 21:01:37 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_quoted_to_text.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 20:19:50 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/20 18:21:46 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/20 21:54:40 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,22 +68,24 @@ char	*double_quoted_to_text(char	*orig, char **envp, t_data *data)
 	char	*new;
 	char	*temp;
 	char	*env_var;
+	char	*temp2;
 	size_t	i;
 
 	temp = ft_calloc(1000000, 1);
-	i = 0;
-	while (orig[i] != '\"')
+	i = -1;
+	while (orig[++i] != '\"')
 	{
 		if (orig[i] != '$')
 			ft_strlcat(temp, orig + i, ft_strlen(temp) + 2);
 		else
 		{
 			env_var = identify_env_var(orig + i);
+			temp2 = get_env_var(env_var, envp, data);
 			i = i + ft_strlen(env_var);
-			ft_strlcat(temp, get_env_var(env_var, envp, data), 1000000);
+			ft_strlcat(temp, temp2, 1000000);
 			free(env_var);
+			free(temp2);
 		}
-		i++;
 	}
 	new = create_new_from_temp(temp);
 	free(temp);

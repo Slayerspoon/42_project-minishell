@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils_strings.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:14:08 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/19 20:43:04 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/20 21:47:22 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	*ft_strjoin_three(char *first, char *second, char *third)
 	str_len = str_len + ft_strlen(first);
 	str_len = str_len + ft_strlen(second);
 	str_len = str_len + ft_strlen(third);
+	str_len = str_len + 10;
 	final_str = ft_calloc(str_len + 1, sizeof(char));
 	index = 0;
 	ft_strlcpy(final_str, first, ft_strlen(first) + 1);
@@ -56,11 +57,12 @@ char	*word_to_string(char *orig, char **envp, t_data *data)
 	char	*new;
 	char	*temp;
 	char	*env_var;
+	char	*temp2;
 	size_t	i;
 
 	temp = ft_calloc(1000000, 1);
-	i = 0;
-	while (orig[i] != ' ' && orig[i] != '\t' && orig[i] != '\0'
+	i = -1;
+	while (orig[++i] != ' ' && orig[i] != '\t' && orig[i] != '\0'
 		&& orig[i] != '\'' && orig[i] != '\"')
 	{
 		if (orig[i] != '$')
@@ -68,14 +70,14 @@ char	*word_to_string(char *orig, char **envp, t_data *data)
 		else
 		{
 			env_var = identify_env_var(orig + i);
+			temp2 = get_env_var(env_var, envp, data);
 			i = i + ft_strlen(env_var);
-			ft_strlcat(temp, get_env_var(env_var, envp, data), 1000000);
+			ft_strlcat(temp, temp2, 1000000);
 			free(env_var);
+			free(temp2);
 		}
-		i++;
 	}
-	new = create_new_from_temp(temp);
-	free(temp);
+	new = create_new_from_temp_free(temp);
 	return (new);
 }
 

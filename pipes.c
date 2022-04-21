@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 17:43:00 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/11 14:31:07 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/20 20:27:27 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	multi_pipe_child(int i, int *fd, int (*new_fd)[2], t_data *data)
 	close(new_fd[i % 2][0]);
 	dup2(new_fd[i % 2][1], 1);
 	close(new_fd[i % 2][1]);
+	close(new_fd[i % 2][0]);
 	if (set_data(data, i, 0, 0))
 		exit(1);
 	exec_all(data, i);
@@ -41,6 +42,7 @@ void	pipe_last_command(int i, int *fd, t_data *data)
 
 	dup2(fd[0], 0);
 	close(fd[1]);
+	close(fd[0]);
 	redirect_output(data);
 	pid = fork();
 	if (pid == -1)
@@ -83,6 +85,7 @@ void	pipe_first_command(int *fd, t_data *data)
 {
 	dup2(fd[1], 1);
 	close(fd[0]);
+	close(fd[1]);
 	if (!set_data(data, 0, 0, 0))
 		exec_all(data, 0);
 	else
