@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/22 14:47:32 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/22 17:57:16 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char	what_is_next_quote(char *str);
 char	*find_next_quote(char *str, char quote);
 int		check_all_quotes(char *str);
 int		check_all_quotes_till(char *str, char *stop_ptr);
+int		index_is_quoted(char *start_ptr, int stop_index);
 
 /* input_check.c */
 int		ang_brackets_conditions(char *input, int index);

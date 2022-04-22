@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_to_strings.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 18:56:37 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/22 14:41:07 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/22 17:59:29 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,19 @@ int	has_quote(char *start_ptr)
 /* Returns the length of the potentially mergeable string. */
 int	final_string_length(char *start_ptr)
 {
-	int	quotes;
-	int	index;
-	int	length;
+	int		index;
 
 	index = 0;
-	quotes = 0;
-	length = 0;
 	while (start_ptr[index] != '\0')
 	{
-		if (start_ptr[index] == '\'' || start_ptr[index] == '\"')
-			quotes++;
 		if ((start_ptr[index] == ' ' || start_ptr[index] == '\t')
-			&& quotes % 2 == 0)
-			return (length);
-		length++;
+			&& index_is_quoted(start_ptr, index) == 0)
+		{
+			break ;
+		}
 		index++;
 	}
-	return (length);
+	return (index);
 }
 
 /* Returns the number of strings needed for the final array of strings. */

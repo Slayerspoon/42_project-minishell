@@ -6,7 +6,7 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:09:27 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/20 18:00:52 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/22 17:55:33 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,33 @@ int	check_all_quotes_till(char *str, char *stop_ptr)
 		current_char_ptr++;
 	}
 	return (0);
+}
+
+int	index_is_quoted(char *start_ptr, int stop_index)
+{
+	char	current_quote;
+	int		quoted;
+	int		local_index;
+
+	local_index = 0;
+	current_quote = '\0';
+	quoted = 0;
+	while (local_index <= stop_index)
+	{
+		if (start_ptr[local_index] == '\'' || start_ptr[local_index] == '\"')
+		{
+			if (quoted == 0)
+			{
+				current_quote = start_ptr[local_index];
+				quoted = 1;
+			}
+			else if (start_ptr[local_index] == current_quote)
+			{
+				current_quote = '\0';
+				quoted = 0;
+			}
+		}
+		local_index++;
+	}
+	return (quoted);
 }
