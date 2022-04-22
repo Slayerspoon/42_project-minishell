@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 17:43:00 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/20 20:27:27 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/22 14:14:57 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,16 @@ void	pipe_last_command(int i, int *fd, t_data *data)
 	dup2(fd[0], 0);
 	close(fd[1]);
 	close(fd[0]);
-	redirect_output(data);
 	pid = fork();
 	if (pid == -1)
 		perror("fork error");
-	if (set_data(data, i, 0, 0))
-		exit(1);
+	g_pid = pid;
 	if (!pid)
+	{
+		if (set_data(data, i, 0, 0))
+			exit(1);
 		exec_all(data, i);
+	}
 	waitpid(0, &wstatus, 0);
 	data->exit_status = WEXITSTATUS(wstatus);
 }
@@ -69,6 +71,7 @@ void	handle_pipes(int *fd, t_data *data)
 		pid = fork();
 		if (pid == -1)
 			perror("fork error");
+		g_pid = pid;
 		if (!pid)
 			multi_pipe_child(i, fd, new_fd, data);
 		else

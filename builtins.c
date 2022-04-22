@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:37:43 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/18 15:34:56 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/22 13:21:36 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	ft_exit(char **cmd, t_data *data)
 	{
 		if (cmd[2])
 		{
-			ft_putstr_fd("exit: too many arguments", 2);
+			ft_putstr_fd("exit: too many arguments\n", 2);
 			return (1);
 		}
 		while (cmd[1][i])

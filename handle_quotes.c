@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:58:49 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/21 21:24:43 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/22 15:03:15 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ int	handle_double_q(char *start, char *temp, t_data *data)
 			index = index + handle_env_var(start + index, temp, data);
 		else
 			ft_strlcat(temp, start + index, ft_strlen(temp) + 1 + 1);
+		//printf("Here: %s\n", start+index);
 		index++;
 	}
+	// printf("%d\n", index);
 	return (index);
 }

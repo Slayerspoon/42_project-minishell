@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 15:31:14 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/20 13:47:38 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/22 13:04:01 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	execute_single_command(t_data *data)
 		pid = fork();
 		if (pid == -1)
 			perror("fork error");
+		g_pid = pid;
 		if (!pid)
 			exec_command(data->commands[0], data);
 		wait(&wstatus);
@@ -102,6 +103,7 @@ void	execute_pipes(int *fd, t_data *data)
 	pid = fork();
 	if (pid == -1)
 		perror("fork error");
+	g_pid = pid;
 	if (!pid)
 		pipe_first_command(fd, data);
 	else

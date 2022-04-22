@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 18:21:55 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/15 19:45:22 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/22 13:22:27 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	unset_error(char *str)
 	}
 	ft_putstr_fd("unset: ", 2);
 	ft_putstr_fd("str", 2);
-	ft_putstr_fd(": not a valid identifier", 2);
+	ft_putstr_fd(": not a valid identifier\n", 2);
 	return (1);
 }
 

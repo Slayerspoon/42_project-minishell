@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:50:25 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/20 20:58:21 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/22 14:24:16 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,7 @@ void	get_input(char **line)
 	char	*prompt;
 
 	prompt = get_prompt();
-	if (!(g_flag[0] && g_flag[1]))
-	{
-		g_flag[0] = 1;
-		line[0] = readline((const char *) prompt);
-	}
-	else
-	{
-		g_flag[0] = 0;
-		line[0] = readline("");
-	}
-	g_flag[1] = 0;
+	line[0] = readline((const char *) prompt);
 	free(prompt);
 }
 
@@ -85,6 +75,7 @@ void	cleanup(char *line, t_data *data)
 	close(data->orig_fds[1]);
 	close(data->orig_fds[2]);
 	free(line);
+	g_pid = 0;
 	if (data->path)
 		free_arr(data->path);
 	if (data->commands)
@@ -96,7 +87,7 @@ void	cleanup(char *line, t_data *data)
 		unlink("temp_file_frog");
 }
 
-int	g_flag[2] = {1, 0};
+pid_t	g_pid = 0;
 
 int	main(int argc, char **argv, char **envp)
 {

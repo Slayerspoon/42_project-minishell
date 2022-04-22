@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   generate_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:42:20 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/21 21:23:55 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/22 14:48:37 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

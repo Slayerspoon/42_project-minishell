@@ -6,7 +6,7 @@
 /*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 13:20:15 by kpucylo           #+#    #+#             */
-/*   Updated: 2022/04/20 20:50:58 by kpucylo          ###   ########.fr       */
+/*   Updated: 2022/04/22 13:06:33 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,18 @@ void	handle_signal(int sig)
 {
 	if (sig == SIGINT)
 	{
-		g_flag[1] = 1;
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		if (g_pid > 0)
+		{
+			kill(g_pid, SIGKILL);
+			printf("\n");
+		}
+		else
+		{
+			printf("\n");
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
 	}
 	else if (sig == SIGQUIT)
 	{

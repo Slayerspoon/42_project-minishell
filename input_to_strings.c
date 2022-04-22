@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_to_strings.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: kpucylo <kpucylo@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 18:56:37 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/21 22:23:33 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/22 14:41:07 by kpucylo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ char	**input_to_strings(char *input, t_data *data)
 	int		count;
 
 	count = count_needed_strings(input);
-	array_of_strs = malloc(sizeof(char *) * (count + 1));
+	array_of_strs = ft_calloc((count + 1), sizeof(char *));
 	count = 0;
 	index = 0;
 	while (input[index] != '\0')
