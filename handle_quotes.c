@@ -6,13 +6,16 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:58:49 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/22 17:58:17 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/22 19:13:21 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include "minishell.h"
 
+/* - Identifies and expands an environment variable */
+/* - Appends the expanded value to the string *temp */
+/* - Returns the number of chars to skip in the original string. */
 int	handle_env_var(char *start, char *temp, t_data *data)
 {
 	char	*var_name;
@@ -28,6 +31,8 @@ int	handle_env_var(char *start, char *temp, t_data *data)
 	return (skippable_chars);
 }
 
+/* - Appends the read characters to the string *temp */
+/* - Returns the number of chars to skip in the original string. */
 int	handle_single_q(char *start, char *temp)
 {
 	int	index;
@@ -42,6 +47,10 @@ int	handle_single_q(char *start, char *temp)
 	return (index);
 }
 
+/* - Appends the read characters to the string *temp */
+/* - Identifies and expands an environment variable */
+/* - Appends the expanded value to the string *temp */
+/* - Returns the number of chars to skip in the original string. */
 int	handle_double_q(char *start, char *temp, t_data *data)
 {
 	int	index;

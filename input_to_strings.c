@@ -6,14 +6,14 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 18:56:37 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/22 17:59:29 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/22 19:19:44 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include "minishell.h"
 
-/* Determines whether the next potentially mergeable string has a quote. */
+/* Determines whether the "word" pointed to by *start_ptr has a quote. */
 int	has_quote(char *start_ptr)
 {
 	int	quotes;
@@ -40,7 +40,7 @@ int	has_quote(char *start_ptr)
 		return (1);
 }
 
-/* Returns the length of the potentially mergeable string. */
+/* Returns the length of the "word" pointed to by *start_ptr. */
 int	final_string_length(char *start_ptr)
 {
 	int		index;
@@ -80,23 +80,29 @@ int	count_needed_strings(char *input)
 }
 
 /* Generates and returns the next string for the array of strings. */
-char	*generate_string(char *start_ptr, char **envp, t_data *data)
+char	*parse_word(char *start_ptr, t_data *data)
 {
 	char	*new_str;
-	char	quote;
+	int		index;
 	char	*temp;
 
-	temp = start_ptr;
-	if (!has_quote(start_ptr))
-		new_str = word_to_string(start_ptr, envp, data);
-	while (has_quote(temp))
+	index = 0;
+	temp = ft_calloc(1000000, sizeof(char));
+	while (start_ptr[index] != ' ' && start_ptr[index] != '\t'
+		&& start_ptr[index] != '\0')
 	{
-		quote = what_is_next_quote(temp);
-		new_str = join_quoted(temp, quote, envp, data);
-		if (temp != start_ptr)
-			free(temp);
-		temp = new_str;
+		if (start_ptr[index] == '\'')
+			index = index + handle_single_q(start_ptr + index, temp);
+		else if (start_ptr[index] == '\"')
+			index = index + handle_double_q(start_ptr + index, temp, data);
+		else if (start_ptr[index] == '$')
+			index = index + handle_env_var(start_ptr + index, temp, data);
+		else
+			ft_strlcat(temp, start_ptr + index, ft_strlen(temp) + 1 + 1);
+		index++;
 	}
+	new_str = ft_strdup(temp);
+	free(temp);
 	return (new_str);
 }
 

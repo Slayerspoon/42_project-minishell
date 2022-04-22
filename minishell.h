@@ -6,7 +6,7 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 19:15:22 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/22 17:57:16 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/22 19:21:38 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,6 @@ int		handle_env_var(char *start, char *temp, t_data *data);
 int		handle_single_q(char *start, char *temp);
 int		handle_double_q(char *start, char *temp, t_data *data);
 
-/* generate_string.c */
-char	*parse_word(char *start_ptr, t_data *data);
-
 /* minishell_quoted_to_text.c */
 char	*identify_env_var(char *start_ptr);
 char	*create_new_from_temp(char *temp);
@@ -92,7 +89,7 @@ char	*join_quoted(char *start_ptr, char quote, char **envp, t_data *data);
 int		has_quote(char *start_ptr);
 int		final_string_length(char *start_ptr);
 int		count_needed_strings(char *input);
-char	*generate_string(char *start_ptr, char **envp, t_data *data);
+char	*parse_word(char *start_ptr, t_data *data);
 char	**input_to_strings(char *input, t_data *data);
 
 /* minishell_utils_strings.c */

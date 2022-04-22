@@ -6,7 +6,7 @@
 /*   By: aionescu <aionescu@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:09:27 by aionescu          #+#    #+#             */
-/*   Updated: 2022/04/22 17:55:33 by aionescu         ###   ########.fr       */
+/*   Updated: 2022/04/22 19:05:03 by aionescu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int	check_all_quotes_till(char *str, char *stop_ptr)
 	return (0);
 }
 
+/* Returns 1 if stop_index is in quotes. Returns 0 otherwise. */
 int	index_is_quoted(char *start_ptr, int stop_index)
 {
 	char	current_quote;
